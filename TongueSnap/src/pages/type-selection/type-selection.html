@@ -1,0 +1,27 @@
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>{{ 'TYPE_TITLE' | translate }}</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content>
+      <ion-list>
+
+          <ion-item>
+              <h2 align = "center">{{ 'TITLE' | translate }}</h2>
+              <p align = "center">{{ 'SUBTITLE' | translate }}</p>
+          </ion-item>
+          <div padding>
+            <button (click)="gotoClient()" ion-button color="primary" block>{{ 'CLIENT_BUTTON' | translate }}</button>
+          </div>
+          <div padding>
+              <button (click)="gotoPractitioner()" ion-button color="primary" block>{{ 'PRACTITIONER_BUTTON' | translate }}</button>
+            </div>
+        </ion-list>
+   
+    
+  </ion-content>
+  

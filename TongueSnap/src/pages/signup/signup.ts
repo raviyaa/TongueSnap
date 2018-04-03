@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { User } from '../../models/user';
+import { FormBuilder, FormGroup, FormControl, FormArray, Validators, FormControlName } from '@angular/forms';
+import { FirebaseService } from '../../providers/firebase-service/firebase-service';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 
 
@@ -10,28 +14,37 @@ import { IonicPage, NavController, ToastController } from 'ionic-angular';
   templateUrl: 'signup.html'
 })
 export class SignupPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
-  account: { name: string, email: string, password: string } = {
-    name: 'Test Human',
-    email: 'test@example.com',
-    password: 'test'
-  };
-
+  user: User;
+  signUpForm: FormGroup;
   // Our translated text strings
   private signupErrorString: string;
 
-  constructor(public navCtrl: NavController,
-    public toastCtrl: ToastController,
-    public translateService: TranslateService) {
+  constructor(private navCtrl: NavController,
+    private fb: FormBuilder,
+    private toastCtrl: ToastController,
+    private firebaseService: FirebaseService,
+    private translateService: TranslateService) {
 
     this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
       this.signupErrorString = value;
     })
   }
+  ngOnInit() {
+    this.signUpForm = this.fb.group({
+      name: ['',],
+      email: ['',],
+      location: ['',],
+      password: ['',],
+      repassword: ['',]
 
+    });
+
+   
+  }
   doSignup() {
+    const p = Object.assign({}, this.user, this.signUpForm.value);
+    console.log(p);
+    console.log(this.firebaseService.createUser(p));
    /*  // Attempt to login in through our User service
     this.user.signup(this.account).subscribe((resp) => {
       this.navCtrl.push(MainPage);
