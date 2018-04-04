@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the PractitionerProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { FirebaseService } from '../../providers/firebase-service/firebase-service';
+import { FormBuilder } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 @IonicPage()
 @Component({
@@ -15,7 +11,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PractitionerProfilePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    private navCtrl: NavController,
+    private navParams: NavParams,
+    private fb: FormBuilder,
+    public toastCtrl: ToastController,
+    public firebaseService: FirebaseService,
+    public translateService: TranslateService
+  ) {
   }
 
   ionViewDidLoad() {

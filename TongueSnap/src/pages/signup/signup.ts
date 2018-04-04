@@ -16,7 +16,6 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class SignupPage {
   user: User;
   signUpForm: FormGroup;
-  // Our translated text strings
   private signupErrorString: string;
 
   constructor(private navCtrl: NavController,
@@ -39,26 +38,28 @@ export class SignupPage {
 
     });
 
-   
+
   }
+
   doSignup() {
     const p = Object.assign({}, this.user, this.signUpForm.value);
     console.log(p);
-    console.log(this.firebaseService.createUser(p));
-   /*  // Attempt to login in through our User service
-    this.user.signup(this.account).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
-    }, (err) => {
-
-      this.navCtrl.push(MainPage);
-
-      // Unable to sign up
+    this.firebaseService.createUserAuth(p).then((user) => {
+      console.log(user);
+      if (user != null) {
+        console.log(true);
+        this.firebaseService.createUser(p).then((user) => {
+          console.log('navigate to camera');
+        });
+      }
+    }, error => {
       let toast = this.toastCtrl.create({
-        message: this.signupErrorString,
+        message: error,
         duration: 3000,
         position: 'top'
       });
       toast.present();
-    });*/
-  } 
+    });
+
+  }
 }

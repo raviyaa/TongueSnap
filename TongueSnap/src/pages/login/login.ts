@@ -16,25 +16,19 @@ import { FormBuilder, FormGroup, FormControl, FormArray, Validators, FormControl
 export class LoginPage {
   user: User;
   loginForm: FormGroup;
-  // Our translated text strings
   private loginErrorString: string;
-  users: any /* FirebaseListObservable<any[]>  */;
+  
   constructor(public navCtrl: NavController,
     private fb: FormBuilder,
     public toastCtrl: ToastController,
     public firebaseService: FirebaseService,
-    public translateService: TranslateService,
-    private angularfire: AngularFireDatabase) {
+    public translateService: TranslateService) {
 
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
     });
-    /*  angularfire.list('users').valueChanges().subscribe(res => {
-       console.log(res);
-     }); */
-
-
   }
+  
   ngOnInit() {
     this.loginForm = this.fb.group({
       email: ['',],
@@ -42,9 +36,9 @@ export class LoginPage {
 
     });
 
-    this.firebaseService.getListOfUsers().subscribe(res => {
+  /*   this.firebaseService.getListOfUsers().subscribe(res => {
       console.log(res);
-    });
+    }); */
   }
   // Attempt to login in through our User service
   doLogin() {
@@ -52,23 +46,24 @@ export class LoginPage {
     const p = Object.assign({}, this.user, this.loginForm.value);
 
     console.log(p);
-    //this.firebaseService.login(p);
-   /*  this.firebaseService.userLogin(p).subscribe((resp) => {
-
-    }, (err) => {
-
-      // Unable to log in
+    this.firebaseService.userLogin(p).then((user) => {
+      console.log(user);
+      if (user != null) {
+        console.log(true);
+      }
+    }, error => {
       let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
+        message: error,
         duration: 3000,
         position: 'top'
       });
       toast.present();
-    }); */
+    });
+   
+   
   }
 
   signUp() {
     this.navCtrl.push(TypeSelectionPage);
-    console.log(this.users);
   }
 }

@@ -5,11 +5,12 @@ import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from '../../models/user';
+
 @Injectable()
 export class FirebaseService {
-
   constructor(private afd: AngularFireDatabase,
     private afAuth: AngularFireAuth) {
+
   }
 
   getListOfUsers() {
@@ -20,7 +21,11 @@ export class FirebaseService {
     return this.afd.list('/users').push(user);
   }
 
-  async userLogin(user) {
+  createUserAuth(user) {
+    return this.afAuth.auth.createUserAndRetrieveDataWithEmailAndPassword(user.email, user.password);
+  }
+
+  userLogin(user) {
     return this.afAuth.auth.signInAndRetrieveDataWithEmailAndPassword(user.email, user.password);
   }
 

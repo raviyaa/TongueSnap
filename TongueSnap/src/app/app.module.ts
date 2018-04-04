@@ -17,6 +17,7 @@ import { SignupPage } from '../pages/signup/signup';
 import { FirebaseService } from '../providers/firebase-service/firebase-service';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { TypeSelectionPage } from '../pages/type-selection/type-selection';
+import { PractitionerProfilePage } from '../pages/practitioner-profile/practitioner-profile';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -66,7 +67,8 @@ const firebaseConfig = {
     MyApp,
     LoginPage,
     SignupPage,
-    TypeSelectionPage
+    TypeSelectionPage,
+    PractitionerProfilePage
   ],
   providers: [
     FirebaseService,
