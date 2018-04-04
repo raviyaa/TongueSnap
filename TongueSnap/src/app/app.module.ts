@@ -1,3 +1,4 @@
+import { DataService } from './../providers/dataservice/dataservice';
 import { LoginPage } from './../pages/login/login';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
@@ -18,6 +19,8 @@ import { FirebaseService } from '../providers/firebase-service/firebase-service'
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { TypeSelectionPage } from '../pages/type-selection/type-selection';
 import { PractitionerProfilePage } from '../pages/practitioner-profile/practitioner-profile';
+import { CallNumber } from '@ionic-native/call-number';
+import { PracSignupPage } from '../pages/prac-signup/prac-signup';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -43,7 +46,10 @@ const firebaseConfig = {
     MyApp,
     LoginPage,
     SignupPage,
-    TypeSelectionPage
+    TypeSelectionPage,
+    PractitionerProfilePage,
+    PracSignupPage
+
   ],
   imports: [
     BrowserModule,
@@ -68,10 +74,13 @@ const firebaseConfig = {
     LoginPage,
     SignupPage,
     TypeSelectionPage,
-    PractitionerProfilePage
+    PractitionerProfilePage,
+    PracSignupPage
   ],
   providers: [
     FirebaseService,
+    CallNumber,
+    DataService,
     Camera,
     SplashScreen,
     StatusBar,

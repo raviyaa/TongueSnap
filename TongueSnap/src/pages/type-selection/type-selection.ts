@@ -1,3 +1,4 @@
+import { PracSignupPage } from './../prac-signup/prac-signup';
 import { SignupPage } from './../signup/signup';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -14,14 +15,10 @@ export class TypeSelectionPage {
      public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TypeSelectionPage');
-  }
-
   gotoClient(){
     this.navCtrl.push(SignupPage);
   }
   gotoPractitioner(){
-
+    this.navCtrl.push(PracSignupPage);
   }
 }

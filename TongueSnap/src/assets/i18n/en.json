@@ -53,5 +53,19 @@
   "SEARCH_PLACEHOLDER": "Search the items list, e.g. \"Donald Duck\"",
   "TYPE_TITLE": "Type Selection",
   "CLIENT_BUTTON": "Client",
-  "PRACTITIONER_BUTTON": "Practitioner"
+  "PRACTITIONER_BUTTON": "Practitioner",
+  "PRACTITIONER_PROFILE": {
+    "TITLE": "Profile",
+    "BTN_TALK": "Talk",
+    "BTN_MAKEAPPOINMENT": "Make Appoinment",
+    "SIGNUP": {
+      "NAME": "Name",
+      "TITLE": "Title",
+      "SPECIALITY": "Speciality",
+      "SHORTBIO": "Short Bio",
+      "PASSWORD": "Password",
+      "REPASSWORD": "Retype Password",
+      "BTN_NEXT": "Next"
+    }
+  }
 }

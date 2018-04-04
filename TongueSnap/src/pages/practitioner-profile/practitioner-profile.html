@@ -1,12 +1,22 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>practitioner-profile</ion-title>
+    <ion-title>{{ 'PRACTITIONER_PROFILE.TITLE' | translate }}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-item>
+    <ion-avatar item-start>
+      <img src={{user?.avatarUrl}}>
+    </ion-avatar>
+    <h2>{{user?.name}}</h2>
+    <h3>{{user?.title}}</h3>
+    <p>{{user?.location}}</p>
+    <button ion-button color="light" (click)="goToCall()">{{ 'PRACTITIONER_PROFILE.BTN_TALK' | translate }}</button>
+    <button ion-button color="light" (click)="makeAppoinment()">{{ 'PRACTITIONER_PROFILE.BTN_MAKEAPPOINMENT' | translate }}</button>
+  </ion-item>
+  <p>{{user?.bio}}</p>
 </ion-content>

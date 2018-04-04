@@ -2,6 +2,9 @@ export interface User {
     email: string;
     password: string;
     name: string;
-    location: string;
-    repassword: string;
+    avatarUrl: string;
+    bio: string;
+    specialty: string;
+    type: string;
+    title: string;
 }
