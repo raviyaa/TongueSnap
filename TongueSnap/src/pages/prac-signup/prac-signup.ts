@@ -4,6 +4,7 @@ import { User } from '../../models/user';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { FirebaseService } from '../../providers/firebase-service/firebase-service';
 import { TranslateService } from '@ngx-translate/core';
+import { PracSignupImgUploadPage } from '../prac-signup-img-upload/prac-signup-img-upload';
 
 @IonicPage()
 @Component({
@@ -40,7 +41,8 @@ export class PracSignupPage {
   }
 
   doSignup() {
-    const p = Object.assign({}, this.user, this.signUpForm.value);
+    this.navCtrl.push(PracSignupImgUploadPage);
+/*     const p = Object.assign({}, this.user, this.signUpForm.value);
     console.log(p);
     this.firebaseService.createUserAuth(p).then((user) => {
       console.log(user);
@@ -57,7 +59,7 @@ export class PracSignupPage {
         position: 'top'
       });
       toast.present();
-    });
+    }); */
 
   }
 }

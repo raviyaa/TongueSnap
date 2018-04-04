@@ -21,6 +21,11 @@ import { TypeSelectionPage } from '../pages/type-selection/type-selection';
 import { PractitionerProfilePage } from '../pages/practitioner-profile/practitioner-profile';
 import { CallNumber } from '@ionic-native/call-number';
 import { PracSignupPage } from '../pages/prac-signup/prac-signup';
+import { PracSignupImgUploadPage } from '../pages/prac-signup-img-upload/prac-signup-img-upload';
+import { DashboardPage } from '../pages/dashboard/dashboard';
+import { ConversationPage } from '../pages/conversation/conversation';
+import { FavouritePage } from '../pages/favourite/favourite';
+import { FeedbackPage } from '../pages/feedback/feedback';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -48,7 +53,12 @@ const firebaseConfig = {
     SignupPage,
     TypeSelectionPage,
     PractitionerProfilePage,
-    PracSignupPage
+    PracSignupPage,
+    PracSignupImgUploadPage,
+    DashboardPage,
+    ConversationPage,
+    FavouritePage,
+    FeedbackPage
 
   ],
   imports: [
@@ -75,7 +85,12 @@ const firebaseConfig = {
     SignupPage,
     TypeSelectionPage,
     PractitionerProfilePage,
-    PracSignupPage
+    PracSignupPage,
+    PracSignupImgUploadPage,
+    DashboardPage,
+    ConversationPage,
+    FavouritePage,
+    FeedbackPage
   ],
   providers: [
     FirebaseService,

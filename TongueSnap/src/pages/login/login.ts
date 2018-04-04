@@ -1,3 +1,4 @@
+import { DashboardPage } from './../dashboard/dashboard';
 import { PractitionerProfilePage } from './../practitioner-profile/practitioner-profile';
 import { TypeSelectionPage } from './../type-selection/type-selection';
 import { User } from './../../models/user';
@@ -57,7 +58,8 @@ export class LoginPage {
     this.firebaseService.userLogin(p).then((user) => {
       console.log(user);
       if (user != null) {
-        this.navCtrl.push(PractitionerProfilePage);
+        //this.navCtrl.push(PractitionerProfilePage);
+        this.navCtrl.push(DashboardPage);
       }
     }, error => {
       let toast = this.toastCtrl.create({
