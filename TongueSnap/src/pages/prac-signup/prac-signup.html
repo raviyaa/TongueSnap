@@ -1,0 +1,47 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ 'PRACTITIONER_PROFILE.TITLE' | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content>
+  <h2 align="center">{{ 'TITLE' | translate }}</h2>
+  <p align="center">{{ 'SUBTITLE' | translate }}</p>
+  <form [formGroup]="signUpForm" (submit)="doSignup()">
+    <ion-list>
+
+      <ion-item>
+        <ion-label fixed>{{ 'PRACTITIONER_PROFILE.SIGNUP.NAME' | translate }}</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>{{ 'PRACTITIONER_PROFILE.SIGNUP.TITLE' | translate }}</ion-label>
+        <ion-input type="text" formControlName="title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>{{ 'PRACTITIONER_PROFILE.SIGNUP.SPECIALITY' | translate }}</ion-label>
+        <ion-input type="text" formControlName="speciality"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>{{ 'PRACTITIONER_PROFILE.SIGNUP.SHORTBIO' | translate }}</ion-label>
+        <ion-input type="text" formControlName="bio"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>{{ 'PRACTITIONER_PROFILE.SIGNUP.PASSWORD' | translate }}</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>{{ 'PRACTITIONER_PROFILE.SIGNUP.REPASSWORD' | translate }}</ion-label>
+        <ion-input type="password" formControlName="repassword"></ion-input>
+      </ion-item>
+      <div padding>
+        <button ion-button color="primary" block>{{ 'PRACTITIONER_PROFILE.SIGNUP.BTN_NEXT' | translate }}</button>
+      </div>
+
+    </ion-list>
+  </form>
+</ion-content>
+<ion-header>
+
