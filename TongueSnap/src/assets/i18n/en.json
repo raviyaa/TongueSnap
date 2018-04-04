@@ -67,8 +67,20 @@
       "REPASSWORD": "Retype Password",
       "BTN_NEXT": "Next"
     },
-    "IMG_UPLOAD":{
-      "LBL_ADD_IMG":"Add Image"
+    "IMG_UPLOAD": {
+      "LBL_ADD_IMG": "Add Image"
     }
+  },
+  "FEEDBACK": {
+    "TITLE": "Feedback",
+    "BTN_TAKEPHOTO": "Take Photo"
+  },
+  "DASHBOARD": {
+    "TAB_FEEDBACK": "Feedback",
+    "TAB_FAVOURITE": "Favourite",
+    "TAB_CONVERSATION": "Conversation"
+  },
+  "SEARCH_PRACTITIONER":{
+    "TITLE":"Practitioners"
   }
 }

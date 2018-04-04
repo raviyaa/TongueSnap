@@ -17,6 +17,10 @@ export class FirebaseService {
     return this.afd.list('/users').valueChanges();
   }
 
+  getListOfSnaps() {
+    return this.afd.list('/snaps').valueChanges();
+  }
+
   createUser(user) {
     return this.afd.list('/users').push(user);
   }

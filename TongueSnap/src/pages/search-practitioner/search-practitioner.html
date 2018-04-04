@@ -1,0 +1,28 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ 'SEARCH_PRACTITIONER.TITLE' | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-list *ngFor="let user of users">
+    <ion-item (click)="practitionerSelected(user)">
+      <ion-avatar item-start>
+        <img src={{user?.avatarUrl}}>
+      </ion-avatar>
+      <h2>{{user?.name}}</h2>
+      <h3>{{user?.title}}</h3>
+      <p>{{user?.location}}</p>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab color="secondary" (click)="sendToPractitioners()">
+      <ion-icon name="arrow-dropright"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>
