@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class SearchPractitionerPage {
 
   users: any[];
+  selectedPractitioners: any[] = [];
 
   constructor(
     private navCtrl: NavController,
@@ -40,6 +41,7 @@ export class SearchPractitionerPage {
   }
   sendToPractitioners() {
     console.log('send to');
+    console.log(this.selectedPractitioners);
   }
 
   getItems(ev: any) {
@@ -53,6 +55,14 @@ export class SearchPractitionerPage {
       this.getListOfPractetioners();
     }
   }
+  chekBoxClicked(user, evt) {
+    if (evt.checked) {
+      this.selectedPractitioners.push(user);
+    } else {
+      this.selectedPractitioners.splice(this.selectedPractitioners.indexOf(user));
+    }
+  }
+
   ionViewDidLoad() {
     //  console.log('ionViewDidLoad SearchPractitionerPage');
   }

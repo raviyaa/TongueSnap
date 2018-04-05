@@ -8,15 +8,18 @@
 
 
 <ion-content padding>
-    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
   <ion-list *ngFor="let user of users">
     <ion-item (click)="practitionerSelected(user)">
+      <ion-checkbox (ionChange)="chekBoxClicked(user,$event)"></ion-checkbox>
       <ion-avatar item-start>
         <img src={{user?.avatarUrl}}>
       </ion-avatar>
-      <h2>{{user?.name}}</h2>
-      <h3>{{user?.title}}</h3>
-      <p>{{user?.location}}</p>
+      <ion-label>
+        <h2>{{user?.name}}</h2>
+        <h3>{{user?.title}}</h3>
+        <p>{{user?.location}}</p>
+      </ion-label>
     </ion-item>
   </ion-list>
 

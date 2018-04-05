@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 
@@ -16,6 +16,7 @@ export class PracSignupImgUploadPage {
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
+    private toastCtrl: ToastController,
     private camera: Camera) {
   }
 
@@ -32,6 +33,13 @@ export class PracSignupImgUploadPage {
 
     this.camera.getPicture(options).then((imageData) => {
       this.base64Image = 'data:image/jpeg;base64,' + imageData;
+     
+      let toast = this.toastCtrl.create({
+        message: this.base64Image,
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
     }, (err) => {
       alert(err);
     });
