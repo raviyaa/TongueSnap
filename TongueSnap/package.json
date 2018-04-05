@@ -45,6 +45,7 @@
     "promise-polyfill": "^7.1.1",
     "rxjs": "5.5.8",
     "sw-toolbox": "3.6.0",
+    "underscore": "^1.8.3",
     "zone.js": "0.8.20"
   },
   "devDependencies": {

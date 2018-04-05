@@ -1,10 +1,12 @@
+import { DataService } from './../../providers/dataservice/dataservice';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { User } from '../../models/user';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FirebaseService } from '../../providers/firebase-service/firebase-service';
 import { TranslateService } from '@ngx-translate/core';
 import { PracSignupImgUploadPage } from '../prac-signup-img-upload/prac-signup-img-upload';
+
 
 @IonicPage()
 @Component({
@@ -20,7 +22,8 @@ export class PracSignupPage {
     private fb: FormBuilder,
     private toastCtrl: ToastController,
     private firebaseService: FirebaseService,
-    private translateService: TranslateService) {
+    private translateService: TranslateService,
+    private dataService: DataService) {
 
     this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
       this.signupErrorString = value;
@@ -28,38 +31,41 @@ export class PracSignupPage {
   }
   ngOnInit() {
     this.signUpForm = this.fb.group({
-      name: ['',],
-      title: ['',],
-      speciality: ['',],
-      bio: ['',],
-      password: ['',],
-      repassword: ['',]
-
+      name: ['', Validators.required],
+      title: ['', Validators.required],
+      speciality: ['', Validators.required],
+      bio: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+      repassword: ['', Validators.required]
     });
-
-
   }
 
   doSignup() {
-    this.navCtrl.push(PracSignupImgUploadPage);
-/*     const p = Object.assign({}, this.user, this.signUpForm.value);
-    console.log(p);
-    this.firebaseService.createUserAuth(p).then((user) => {
-      console.log(user);
-      if (user != null) {
-        console.log(true);
-        this.firebaseService.createUser(p).then((user) => {
-         //navigate to image upload page
-        });
+    if (this.signUpForm.dirty && this.signUpForm.valid) {
+      if (this.signUpForm.value.password.length < 6) {
+        this.createToast("Password min 6 characters");
       }
-    }, error => {
-      let toast = this.toastCtrl.create({
-        message: error,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
-    }); */
+      else if (this.signUpForm.value.password !== this.signUpForm.value.repassword) {
+        this.createToast("Password doesn't match!");
+      } else {
+        const p = Object.assign({}, this.user, this.signUpForm.value);
+        p.type = "practitioner";
+        console.log(p);
+        this.dataService.setSelectedUser(p);
+        this.navCtrl.push(PracSignupImgUploadPage);
+      }
+    } else {
+      this.createToast("Please provide all the details!");
+    }
+  }
 
+  createToast(message) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
   }
 }

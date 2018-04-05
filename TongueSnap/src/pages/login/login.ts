@@ -62,12 +62,7 @@ export class LoginPage {
         this.navCtrl.push(DashboardPage);
       }
     }, error => {
-      let toast = this.toastCtrl.create({
-        message: error,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
+      this.createToast(error);
     });
    
    
@@ -75,5 +70,13 @@ export class LoginPage {
 
   signUp() {
     this.navCtrl.push(TypeSelectionPage);
+  }
+  createToast(message) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
   }
 }

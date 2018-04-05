@@ -35,18 +35,27 @@ export class FeedbackPage {
   }
 
   openCamera() {
-    const options: CameraOptions = {
-      quality: 100,
+    const cameraOptions: CameraOptions = {
+      quality: 50,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
+      mediaType: this.camera.MediaType.PICTURE,
+    };
 
-    this.camera.getPicture(options).then((imageData) => {
+    this.camera.getPicture(cameraOptions).then((imageData) => {
       this.base64Image = 'data:image/jpeg;base64,' + imageData;
       this.navCtrl.push(SearchPractitionerPage);
-    }, (err) => {
-      alert(err);
+    }, (error) => {
+      this.createToast(error);
     });
+  }
+
+  createToast(message) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
   }
 }

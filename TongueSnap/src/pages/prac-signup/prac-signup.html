@@ -17,21 +17,30 @@
       </ion-item>
 
       <ion-item>
+        <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
         <ion-label fixed>{{ 'PRACTITIONER_PROFILE.SIGNUP.TITLE' | translate }}</ion-label>
         <ion-input type="text" formControlName="title"></ion-input>
       </ion-item>
+
       <ion-item>
         <ion-label fixed>{{ 'PRACTITIONER_PROFILE.SIGNUP.SPECIALITY' | translate }}</ion-label>
         <ion-input type="text" formControlName="speciality"></ion-input>
       </ion-item>
+
       <ion-item>
         <ion-label fixed>{{ 'PRACTITIONER_PROFILE.SIGNUP.SHORTBIO' | translate }}</ion-label>
         <ion-input type="text" formControlName="bio"></ion-input>
       </ion-item>
+
       <ion-item>
         <ion-label fixed>{{ 'PRACTITIONER_PROFILE.SIGNUP.PASSWORD' | translate }}</ion-label>
         <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
+      
       <ion-item>
         <ion-label fixed>{{ 'PRACTITIONER_PROFILE.SIGNUP.REPASSWORD' | translate }}</ion-label>
         <ion-input type="password" formControlName="repassword"></ion-input>
@@ -44,4 +53,3 @@
   </form>
 </ion-content>
 <ion-header>
-

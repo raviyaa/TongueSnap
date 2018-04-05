@@ -1,3 +1,4 @@
+import { DashboardPage } from './../dashboard/dashboard';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
@@ -5,8 +6,7 @@ import { User } from '../../models/user';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators, FormControlName } from '@angular/forms';
 import { FirebaseService } from '../../providers/firebase-service/firebase-service';
 import { AngularFireDatabase } from 'angularfire2/database';
-
-
+import * as _ from 'underscore';
 
 @IonicPage()
 @Component({
@@ -30,36 +30,52 @@ export class SignupPage {
   }
   ngOnInit() {
     this.signUpForm = this.fb.group({
-      name: ['',],
-      email: ['',],
-      location: ['',],
-      password: ['',],
-      repassword: ['',]
-
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      location: ['', Validators.required],
+      password: ['', Validators.required],
+      repassword: ['', Validators.required]
     });
 
 
   }
 
   doSignup() {
-    const p = Object.assign({}, this.user, this.signUpForm.value);
-    console.log(p);
-    this.firebaseService.createUserAuth(p).then((user) => {
-      console.log(user);
-      if (user != null) {
-        console.log(true);
-        this.firebaseService.createUser(p).then((user) => {
-          console.log('navigate to camera');
+    if (this.signUpForm.dirty && this.signUpForm.valid) {
+      if (this.signUpForm.value.password.length<6) {
+        this.createToast("Password min 6 characters");
+      }
+      else if (this.signUpForm.value.password !== this.signUpForm.value.repassword) {
+        this.createToast("Password doesn't match!");
+      } else {
+        const p = Object.assign({}, this.user, this.signUpForm.value);
+        p.type = "client";
+        console.log(p);
+        this.firebaseService.createUserAuth(p).then((user) => {
+          console.log(user);
+          if (!_.isEmpty(user)) {
+            this.firebaseService.createUser(p).then((user) => {
+              console.log('navigate to dashboard');
+              console.log(user.key);
+              this.createToast("Regesitration successful!");
+              this.navCtrl.push(DashboardPage);
+            });
+          }
+        }, error => {
+          this.createToast(error);
         });
       }
-    }, error => {
-      let toast = this.toastCtrl.create({
-        message: error,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
-    });
+    } else {
+      this.createToast("Please provide all the details!");
+    }
 
+  }
+  createToast(message) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
   }
 }
