@@ -10,6 +10,7 @@ import { FirebaseService } from '../../providers/firebase-service/firebase-servi
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators, FormControlName } from '@angular/forms';
 import { DataService } from '../../providers/dataservice/dataservice';
+import * as _ from 'underscore';
 
 @IonicPage()
 @Component({
@@ -19,9 +20,10 @@ import { DataService } from '../../providers/dataservice/dataservice';
 export class LoginPage {
   user: User;
   loginForm: FormGroup;
-  list:any[];
+  list: any[];
+  currentUser: any;
   private loginErrorString: string;
-  
+
   constructor(public navCtrl: NavController,
     private fb: FormBuilder,
     public toastCtrl: ToastController,
@@ -33,39 +35,38 @@ export class LoginPage {
       this.loginErrorString = value;
     });
   }
-  
+
   ngOnInit() {
     this.loginForm = this.fb.group({
       email: ['',],
       password: ['',],
 
     });
-
-    this.firebaseService.getListOfUsers().subscribe((value) => {
-      this.list = value;
-    })
-
   }
   // Attempt to login in through our User service
   doLogin() {
-    
-    this.dataService.setSelectedUser(this.list[1]);
-
-    console.log(this.loginForm.value);
     const p = Object.assign({}, this.user, this.loginForm.value);
-
-    console.log(p);
     this.firebaseService.userLogin(p).then((user) => {
-      console.log(user);
-      if (user != null) {
-        //this.navCtrl.push(PractitionerProfilePage);
-        this.navCtrl.push(DashboardPage);
+      if (!_.isEmpty(user)) {
+        this.firebaseService.findUserByEmail(p.email).subscribe((res) => {
+          this.currentUser = res[0];
+          this.dataService.setSelectedUser(this.currentUser);
+          console.log(this.currentUser);
+
+          if (this.currentUser.type == "client") {
+            this.navCtrl.push(DashboardPage);
+          } else if (this.currentUser.type == "practitioner") {
+            this.navCtrl.push(PractitionerProfilePage);
+          } else {
+            this.createToast("Something went wrong!");
+          }
+        });
+
       }
     }, error => {
       this.createToast(error);
     });
-   
-   
+
   }
 
   signUp() {

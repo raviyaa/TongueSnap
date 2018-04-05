@@ -16,6 +16,12 @@ export class FirebaseService {
     private camera: Camera) {
 
   }
+  findUserByEmail(email){
+   return this.afd.list('/users', ref => ref.orderByChild('email').equalTo(email)).valueChanges();
+  }
+  findUserByKey(key) {
+    return this.afd.object(`users/${key}`).valueChanges();
+  }
   uploadImage(imageUrl, imageRef) {
     return imageRef.putString(imageUrl, storage.StringFormat.DATA_URL);
 
@@ -36,7 +42,9 @@ export class FirebaseService {
   createUser(user) {
     return this.afd.list('/users').push(user);
   }
-
+  currentUser() {
+    return this.afAuth.auth.currentUser;
+  }
   createUserAuth(user) {
     return this.afAuth.auth.createUserAndRetrieveDataWithEmailAndPassword(user.email, user.password);
   }
