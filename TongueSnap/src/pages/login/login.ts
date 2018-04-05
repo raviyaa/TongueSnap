@@ -11,6 +11,7 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators, FormControlName } from '@angular/forms';
 import { DataService } from '../../providers/dataservice/dataservice';
 import * as _ from 'underscore';
+import { APP_DI_CONFIG } from '../../app/app-config/app-config.constants';
 
 @IonicPage()
 @Component({
@@ -52,10 +53,9 @@ export class LoginPage {
           this.currentUser = res[0];
           this.dataService.setSelectedUser(this.currentUser);
           console.log(this.currentUser);
-
-          if (this.currentUser.type == "client") {
+          if (this.currentUser.type == APP_DI_CONFIG.TYPE_CLIENT) {
             this.navCtrl.push(DashboardPage);
-          } else if (this.currentUser.type == "practitioner") {
+          } else if (this.currentUser.type == APP_DI_CONFIG.TYPE_PRACTITIONER) {
             this.navCtrl.push(PractitionerProfilePage);
           } else {
             this.createToast("Something went wrong!");

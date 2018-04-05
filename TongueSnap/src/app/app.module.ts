@@ -27,6 +27,7 @@ import { ConversationPage } from '../pages/conversation/conversation';
 import { FavouritePage } from '../pages/favourite/favourite';
 import { FeedbackPage } from '../pages/feedback/feedback';
 import { SearchPractitionerPage } from '../pages/search-practitioner/search-practitioner';
+import { APP_CONFIG, APP_DI_CONFIG } from './app-config/app-config.constants';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -104,6 +105,10 @@ const firebaseConfig = {
     StatusBar,
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    {
+      provide: APP_CONFIG,
+      useValue: APP_DI_CONFIG
+    },
   ]
 })
 export class AppModule { }
