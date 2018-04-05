@@ -17,14 +17,18 @@
     </ion-item>
 
     <ion-item>
-        <div padding>
-            <button ion-button (click)="openCamera()"color="primary" block>Take a photo</button>
-            <img [src]="base64Image"/>
-          </div>
+      <div padding>
+        <button ion-button (click)="capture()">Lets take a picture!</button>
+        <img [src]="base64Image" *ngIf="base64Image" />
+        <!--   <button ion-button icon-right color="dark" (click)="changePicture()">
+          Upload picture
+          <ion-icon name="images"></ion-icon>
+        </button> -->
+      </div>
     </ion-item>
 
     <div padding>
-      <button ion-button color="primary" block>{{ 'LOGIN_BUTTON' | translate }}</button>
+      <button ion-button (click)="upload()" color="primary" block>{{ 'LOGIN_BUTTON' | translate }}</button>
     </div>
 
   </ion-list>

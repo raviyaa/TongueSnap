@@ -5,12 +5,24 @@ import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from '../../models/user';
+import { storage } from 'firebase';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Injectable()
 export class FirebaseService {
-  constructor(private afd: AngularFireDatabase,
-    private afAuth: AngularFireAuth) {
+  constructor(
+    private afd: AngularFireDatabase,
+    private afAuth: AngularFireAuth,
+    private camera: Camera) {
 
+  }
+  uploadImage(imageUrl, imageRef) {
+    return imageRef.putString(imageUrl, storage.StringFormat.DATA_URL);
+
+  }
+
+  getImageUrl(imageRef) {
+    return imageRef.getDownloadURL();
   }
 
   getListOfUsers() {

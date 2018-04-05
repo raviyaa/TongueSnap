@@ -4,7 +4,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
-import { SearchPractitionerPage } from '../pages/search-practitioner/search-practitioner';
 
 @Component({
   template: `<ion-menu [content]="content">
@@ -12,7 +11,7 @@ import { SearchPractitionerPage } from '../pages/search-practitioner/search-prac
   <ion-nav #content [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage = SearchPractitionerPage;
+  rootPage = LoginPage;
 
 
   @ViewChild(Nav) nav: Nav;
