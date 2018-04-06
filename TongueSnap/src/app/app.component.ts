@@ -11,7 +11,7 @@ import { Config, Nav, Platform } from 'ionic-angular';
   <ion-nav #content [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage = LoginPage;
+  rootPage = LoginPage;  
 
 
   @ViewChild(Nav) nav: Nav;

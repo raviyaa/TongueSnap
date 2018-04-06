@@ -1,0 +1,20 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ 'INQUIRY.TITLE' | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list *ngFor="let inquire of inquires">
+    <ion-item>
+      <ion-avatar item-start>
+        <img src={{inquire?.imageUrl}}>
+      </ion-avatar>
+      <h2>{{inquire?.description}}</h2>
+      <p>{{inquire?.comment}}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>

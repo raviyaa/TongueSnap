@@ -1,3 +1,4 @@
+import { InquirePage } from './../inquire/inquire';
 import { PractitionerProfilePage } from './../practitioner-profile/practitioner-profile';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -12,7 +13,8 @@ import { ConversationPage } from '../conversation/conversation';
 export class PracDashboardPage {
 
   tab1Root = PractitionerProfilePage;
-  tab2Root = ConversationPage;
+  tab2Root = InquirePage;
+  tab3Root = ConversationPage;
   
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }

@@ -82,6 +82,7 @@
   },
   "PRAC_DASHBOARD": {
     "TAB_PROFILE": "Profile",
+    "TAB_INQUIRE": "Inquires",
     "TAB_CONVERSATION": "Conversation"
   },
   "SEARCH_PRACTITIONER":{
@@ -91,5 +92,8 @@
     "TITLE":"Snap",
     "TXT_DESCRIPTION":"Provide description",
     "BTN_NEXT":"Next"
+  },
+  "INQUIRY":{
+    "TITLE":"Inquires"
   }
 }

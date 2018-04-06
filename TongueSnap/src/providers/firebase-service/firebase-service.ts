@@ -17,6 +17,12 @@ export class FirebaseService {
 
   }
 
+
+  getListOfSnapsByPractetionerId(userId) {
+    return this.afd.list('snaps', ref => ref.orderByChild("practitioners").equalTo("-L9QCGuVqTgh_o7pJS-y")).valueChanges();
+   
+  }
+
   getListOfSnapsByPatientId(userId) {
     return this.afd.list('/snaps', ref => ref.orderByChild('patiendId').equalTo(userId)).valueChanges();
   }
@@ -24,6 +30,9 @@ export class FirebaseService {
   createSnap(key, snap) {
     //return this.afd.list('/snaps').push(snap);
     return this.afd.object(`/snaps/${key}`).set(snap);
+  }
+  pushPractitionerToSnap(key, practitioner) {
+    return this.afd.list('/snaps/' + key + '/practitioners').push(practitioner);
   }
 
   fingUsersByType(type) {

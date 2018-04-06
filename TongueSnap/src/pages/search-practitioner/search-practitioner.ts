@@ -6,7 +6,9 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { FirebaseService } from '../../providers/firebase-service/firebase-service';
 import { TranslateService } from '@ngx-translate/core';
 import { APP_DI_CONFIG } from '../../app/app-config/app-config.constants';
+import * as async from 'async';
 import * as _ from 'underscore';
+
 
 @IonicPage()
 @Component({
@@ -51,16 +53,25 @@ export class SearchPractitionerPage {
   }
   sendToPractitioners() {
     if (!_.isEmpty(this.selectedImage) && !_.isEmpty(this.selectedDescription) && !_.isEmpty(this.selectedPractitioners)) {
+
       var snapObj = {
         imageUrl: this.selectedImage,
         description: this.selectedDescription,
-        practitionerIds: this.selectedPractitioners,
+        practitioners: this.selectedPractitioners,
         patientId: this.selectedUser.key
       };
-
       const key = APP_DI_CONFIG.KEY_SNAP + Math.floor(Date.now() / 1000);
       this.firebaseService.createSnap(key, snapObj).then((user) => {
         this.navCtrl.push(DashboardPage);
+        /*  async.eachSeries(this.selectedPractitioners, function (prac, cb) {
+           this.firebaseService.pushPractitionerToSnap(key, prac).then((user) => {
+             cb();
+           }, error => {
+             this.createToast(error);
+           });
+         }, function () {
+           this.navCtrl.push(DashboardPage);
+         }); */
       }, error => {
         this.createToast(error);
       });
@@ -85,7 +96,7 @@ export class SearchPractitionerPage {
   }
   chekBoxClicked(user, evt) {
     if (evt.checked) {
-      this.selectedPractitioners.push(user.key);
+      this.selectedPractitioners.push(user);
     } else {
       this.selectedPractitioners.splice(this.selectedPractitioners.indexOf(user));
     }

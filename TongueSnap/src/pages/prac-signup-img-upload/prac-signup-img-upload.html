@@ -16,7 +16,7 @@
       <ion-label align="center">{{ 'PRACTITIONER_PROFILE.IMG_UPLOAD.LBL_ADD_IMG' | translate }}</ion-label>
     </ion-item>
 
-    <ion-item>
+    <ion-item class="prac">
       <div padding>
         <ion-avatar item-start (click)="capture()">
           <img [src]="base64Image" *ngIf="base64Image">
