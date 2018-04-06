@@ -5,8 +5,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { FirebaseService } from '../../providers/firebase-service/firebase-service';
 import { TranslateService } from '@ngx-translate/core';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-
-
+import * as _ from 'underscore';
 
 @IonicPage()
 @Component({
@@ -16,6 +15,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 export class FeedbackPage {
   snaps: any[];
   base64Image: string;
+  user: any;
 
   constructor(
     private navCtrl: NavController,
@@ -27,30 +27,41 @@ export class FeedbackPage {
   }
 
   ngOnInit() {
-    this.firebaseService.getListOfSnaps().subscribe((value) => {
-      this.snaps = value;
-    });
+    this.getInitData();
   }
-
+  getInitData() {
+    this.user = this.dataSerivce.getSelectedUser();
+    if (!_.isEmpty(this.user.key)) {
+      this.firebaseService.getListOfSnapsByPatientId(this.user.key).subscribe((snaps) => {
+        this.snaps = snaps;
+      }, error => {
+        this.createToast(error);
+      });
+    } else {
+      this.createToast("Something went wrong!");
+    }
+  }
   ionViewDidLoad() {
     //console.log('ionViewDidLoad FeedbackPage');
   }
 
   openCamera() {
-    const cameraOptions: CameraOptions = {
-      quality: 50,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-    };
-
-    this.camera.getPicture(cameraOptions).then((imageData) => {
-      this.base64Image = 'data:image/jpeg;base64,' + imageData;
-      this.dataSerivce.setSelectedImage(this.base64Image);
-      this.navCtrl.push(CreateSnapPage);
-    }, (error) => {
-      this.createToast(error);
-    });
+    this.dataSerivce.setSelectedImage("no image");
+    this.navCtrl.push(CreateSnapPage);
+    /*  const cameraOptions: CameraOptions = {
+       quality: 50,
+       destinationType: this.camera.DestinationType.DATA_URL,
+       encodingType: this.camera.EncodingType.JPEG,
+       mediaType: this.camera.MediaType.PICTURE,
+     };
+ 
+     this.camera.getPicture(cameraOptions).then((imageData) => {
+       this.base64Image = 'data:image/jpeg;base64,' + imageData;
+       this.dataSerivce.setSelectedImage(this.base64Image);
+       this.navCtrl.push(CreateSnapPage);
+     }, (error) => {
+       this.createToast(error);
+     }); */
   }
 
   createToast(message) {

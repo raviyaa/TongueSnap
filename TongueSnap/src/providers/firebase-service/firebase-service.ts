@@ -16,15 +16,35 @@ export class FirebaseService {
     private camera: Camera) {
 
   }
-  findUserByEmail(email){
-   return this.afd.list('/users', ref => ref.orderByChild('email').equalTo(email)).valueChanges();
+
+  getListOfSnapsByPatientId(userId) {
+    return this.afd.list('/snaps', ref => ref.orderByChild('patiendId').equalTo(userId)).valueChanges();
   }
+
+  createSnap(key, snap) {
+    //return this.afd.list('/snaps').push(snap);
+    return this.afd.object(`/snaps/${key}`).set(snap);
+  }
+
+  fingUsersByType(type) {
+    return this.afd.list('users', ref => ref.orderByChild('type').equalTo(type)).snapshotChanges().map(actions => {
+      return actions.map(action => ({ key: action.key, ...action.payload.val() }));
+    });
+  }
+
+  findUserByEmail(email) {
+    //return this.afd.list('/users', ref => ref.orderByChild('email').equalTo(email)).valueChanges();
+    return this.afd.list('users', ref => ref.orderByChild('email').equalTo(email)).snapshotChanges().map(actions => {
+      return actions.map(action => ({ key: action.key, ...action.payload.val() }));
+    });
+  }
+
   findUserByKey(key) {
     return this.afd.object(`users/${key}`).valueChanges();
   }
+
   uploadImage(imageUrl, imageRef) {
     return imageRef.putString(imageUrl, storage.StringFormat.DATA_URL);
-
   }
 
   getImageUrl(imageRef) {
@@ -42,9 +62,11 @@ export class FirebaseService {
   createUser(user) {
     return this.afd.list('/users').push(user);
   }
+
   currentUser() {
     return this.afAuth.auth.currentUser;
   }
+
   createUserAuth(user) {
     return this.afAuth.auth.createUserAndRetrieveDataWithEmailAndPassword(user.email, user.password);
   }

@@ -1,9 +1,12 @@
+import { DashboardPage } from './../dashboard/dashboard';
 import { PractitionerProfilePage } from './../practitioner-profile/practitioner-profile';
 import { DataService } from './../../providers/dataservice/dataservice';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FirebaseService } from '../../providers/firebase-service/firebase-service';
 import { TranslateService } from '@ngx-translate/core';
+import { APP_DI_CONFIG } from '../../app/app-config/app-config.constants';
+import * as _ from 'underscore';
 
 @IonicPage()
 @Component({
@@ -14,34 +17,59 @@ export class SearchPractitionerPage {
 
   users: any[];
   selectedPractitioners: any[] = [];
+  selectedImage: string;
+  selectedDescription: string;
+  selectedUser: any;
 
   constructor(
     private navCtrl: NavController,
-    private navParams: NavParams,
     private toastCtrl: ToastController,
     private firebaseService: FirebaseService,
     private translateService: TranslateService,
-    private DataService: DataService
+    private dataService: DataService
   ) {
   }
 
 
   ngOnInit() {
     this.getListOfPractetioners();
+    this.getInitData();
   }
-
+  getInitData() {
+    this.selectedImage = this.dataService.getSelectedImage();
+    this.selectedDescription = this.dataService.getSelectedDescription();
+    this.selectedUser = this.dataService.getSelectedUser();
+  }
   getListOfPractetioners() {
-    this.firebaseService.getListOfUsers().subscribe((value) => {
-      this.users = value;
+    this.firebaseService.fingUsersByType(APP_DI_CONFIG.TYPE_PRACTITIONER).subscribe(users => {
+      this.users = users;
     });
   }
   practitionerSelected(user) {
-    this.DataService.setSelectedUser(user);
+    this.dataService.setSelectedUser(user);
     this.navCtrl.push(PractitionerProfilePage);
   }
   sendToPractitioners() {
-    console.log('send to');
-    console.log(this.selectedPractitioners);
+    if (!_.isEmpty(this.selectedImage) && !_.isEmpty(this.selectedDescription) && !_.isEmpty(this.selectedPractitioners)) {
+      var snapObj = {
+        imageUrl: this.selectedImage,
+        description: this.selectedDescription,
+        practitionerIds: this.selectedPractitioners,
+        patientId: this.selectedUser.key
+      };
+
+      const key = APP_DI_CONFIG.KEY_SNAP + Math.floor(Date.now() / 1000);
+      this.firebaseService.createSnap(key, snapObj).then((user) => {
+        this.navCtrl.push(DashboardPage);
+      }, error => {
+        this.createToast(error);
+      });
+
+    } else {
+      this.createToast("Please select practitioners");
+    }
+
+
   }
 
   getItems(ev: any) {
@@ -57,7 +85,7 @@ export class SearchPractitionerPage {
   }
   chekBoxClicked(user, evt) {
     if (evt.checked) {
-      this.selectedPractitioners.push(user);
+      this.selectedPractitioners.push(user.key);
     } else {
       this.selectedPractitioners.splice(this.selectedPractitioners.indexOf(user));
     }
@@ -66,5 +94,12 @@ export class SearchPractitionerPage {
   ionViewDidLoad() {
     //  console.log('ionViewDidLoad SearchPractitionerPage');
   }
-
+  createToast(message) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
+  }
 }

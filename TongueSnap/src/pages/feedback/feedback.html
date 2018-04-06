@@ -11,10 +11,10 @@
   <ion-list *ngFor="let snap of snaps">
     <ion-item>
       <ion-avatar item-start>
-        <img src={{snaps?.imageUrl}}>
+        <img src={{snap?.imageUrl}}>
       </ion-avatar>
-      <h2>{{snaps?.description}}</h2>
-      <p>{{snaps?.feedback}}</p>
+      <h2>{{snap?.description}}</h2>
+      <p>{{snap?.comment}}</p>
     </ion-item>
   </ion-list>
   <ion-list>
