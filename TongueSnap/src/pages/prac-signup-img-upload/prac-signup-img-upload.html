@@ -18,12 +18,9 @@
 
     <ion-item>
       <div padding>
-        <button ion-button (click)="capture()">Lets take a picture!</button>
-        <img [src]="base64Image" *ngIf="base64Image" />
-        <!--   <button ion-button icon-right color="dark" (click)="changePicture()">
-          Upload picture
-          <ion-icon name="images"></ion-icon>
-        </button> -->
+        <ion-avatar item-start (click)="capture()">
+          <img [src]="base64Image" *ngIf="base64Image">
+        </ion-avatar>
       </div>
     </ion-item>
 

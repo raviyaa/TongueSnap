@@ -1,3 +1,4 @@
+
 export interface IAppConfig {
 
   TYPE_CLIENT: string;

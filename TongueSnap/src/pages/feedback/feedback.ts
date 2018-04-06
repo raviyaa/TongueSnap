@@ -1,4 +1,5 @@
-import { SearchPractitionerPage } from './../search-practitioner/search-practitioner';
+import { DataService } from './../../providers/dataservice/dataservice';
+import { CreateSnapPage } from './../create-snap/create-snap';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FirebaseService } from '../../providers/firebase-service/firebase-service';
@@ -21,6 +22,7 @@ export class FeedbackPage {
     private toastCtrl: ToastController,
     private firebaseService: FirebaseService,
     private translateService: TranslateService,
+    private dataSerivce: DataService,
     private camera: Camera) {
   }
 
@@ -44,7 +46,8 @@ export class FeedbackPage {
 
     this.camera.getPicture(cameraOptions).then((imageData) => {
       this.base64Image = 'data:image/jpeg;base64,' + imageData;
-      this.navCtrl.push(SearchPractitionerPage);
+      this.dataSerivce.setSelectedImage(this.base64Image);
+      this.navCtrl.push(CreateSnapPage);
     }, (error) => {
       this.createToast(error);
     });

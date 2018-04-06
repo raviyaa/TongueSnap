@@ -15,7 +15,7 @@ import * as _ from 'underscore';
 })
 export class PracSignupImgUploadPage {
 
-  base64Image: string;
+  base64Image: string = "./assets/img/profile.png";
   image: string;
   user: User;
   constructor(
@@ -36,6 +36,7 @@ export class PracSignupImgUploadPage {
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true
     };
 
     this.camera.getPicture(cameraOptions).then((imageData) => {
@@ -46,40 +47,45 @@ export class PracSignupImgUploadPage {
   }
 
   upload() {
-    let storageRef = storage().ref();
-    const filename = Math.floor(Date.now() / 1000);
-    const imageRef = storageRef.child(`avatars/${filename}.jpg`);
-    this.firebaseService.uploadImage(this.base64Image, imageRef).then((res) => {
-      if (res) {
-        this.firebaseService.getImageUrl(imageRef).then((url) => {
-          console.log(url);
-          this.user.avatarUrl = url;
+    if (!_.isEmpty(this.base64Image)) {
+      let storageRef = storage().ref();
+      const filename = Math.floor(Date.now() / 1000);
+      const imageRef = storageRef.child(`avatars/${filename}.jpg`);
+      this.firebaseService.uploadImage(this.base64Image, imageRef).then((res) => {
+        if (res) {
+          this.firebaseService.getImageUrl(imageRef).then((url) => {
+            console.log(url);
+            this.user.avatarUrl = url;
 
-          this.firebaseService.createUserAuth(this.user).then((user) => {
-            console.log(user);
-            if (!_.isEmpty(user)) {
-              if (!_.isEmpty(this.user)) {
-                this.firebaseService.createUser(this.user).then((user) => {
-                  console.log('navigate to user profile');
-                  console.log(user.key);
-                  this.createToast("Regristration Success!");
-                  this.navCtrl.push(PractitionerProfilePage);
-                });
-              }else{
-                this.createToast("Something went wrong");
+            this.firebaseService.createUserAuth(this.user).then((user) => {
+              console.log(user);
+              if (!_.isEmpty(user)) {
+                if (!_.isEmpty(this.user)) {
+                  this.firebaseService.createUser(this.user).then((user) => {
+                    console.log('navigate to user profile');
+                    console.log(user.key);
+                    this.createToast("Regristration Success!");
+                    this.navCtrl.push(PractitionerProfilePage);
+                  });
+                } else {
+                  this.createToast("Something went wrong");
+                }
               }
-            }
-          }, error => {
+            }, error => {
+              this.createToast(error);
+            });
+            //this.showSuccesfulUploadAlert();
+          }, (error) => {
             this.createToast(error);
           });
-          //this.showSuccesfulUploadAlert();
-        }, (error) => {
-          this.createToast(error);
-        });
-      }
-    }, error => {
-      this.createToast(error);
-    });
+        }
+      }, error => {
+        this.createToast(error);
+      });
+    } else {
+      this.createToast("Something went wrong");
+    }
+
 
   }
   showSuccesfulUploadAlert() {

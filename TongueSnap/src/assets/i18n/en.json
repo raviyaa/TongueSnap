@@ -80,7 +80,16 @@
     "TAB_FAVOURITE": "Favourite",
     "TAB_CONVERSATION": "Conversation"
   },
+  "PRAC_DASHBOARD": {
+    "TAB_PROFILE": "Profile",
+    "TAB_CONVERSATION": "Conversation"
+  },
   "SEARCH_PRACTITIONER":{
     "TITLE":"Practitioners"
+  },
+  "CREATE_SNAP":{
+    "TITLE":"Snap",
+    "TXT_DESCRIPTION":"Provide description",
+    "BTN_NEXT":"Next"
   }
 }

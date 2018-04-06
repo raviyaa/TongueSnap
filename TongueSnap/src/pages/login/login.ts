@@ -1,5 +1,4 @@
 import { DashboardPage } from './../dashboard/dashboard';
-import { PractitionerProfilePage } from './../practitioner-profile/practitioner-profile';
 import { TypeSelectionPage } from './../type-selection/type-selection';
 import { User } from './../../models/user';
 import { SignupPage } from './../signup/signup';
@@ -12,6 +11,7 @@ import { FormBuilder, FormGroup, FormControl, FormArray, Validators, FormControl
 import { DataService } from '../../providers/dataservice/dataservice';
 import * as _ from 'underscore';
 import { APP_DI_CONFIG } from '../../app/app-config/app-config.constants';
+import { PracDashboardPage } from '../prac-dashboard/prac-dashboard';
 
 @IonicPage()
 @Component({
@@ -56,7 +56,7 @@ export class LoginPage {
           if (this.currentUser.type == APP_DI_CONFIG.TYPE_CLIENT) {
             this.navCtrl.push(DashboardPage);
           } else if (this.currentUser.type == APP_DI_CONFIG.TYPE_PRACTITIONER) {
-            this.navCtrl.push(PractitionerProfilePage);
+            this.navCtrl.push(PracDashboardPage);
           } else {
             this.createToast("Something went wrong!");
           }

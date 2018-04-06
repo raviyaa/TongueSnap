@@ -28,6 +28,8 @@ import { FavouritePage } from '../pages/favourite/favourite';
 import { FeedbackPage } from '../pages/feedback/feedback';
 import { SearchPractitionerPage } from '../pages/search-practitioner/search-practitioner';
 import { APP_CONFIG, APP_DI_CONFIG } from './app-config/app-config.constants';
+import { PracDashboardPage } from '../pages/prac-dashboard/prac-dashboard';
+import { CreateSnapPage } from '../pages/create-snap/create-snap';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -61,7 +63,9 @@ const firebaseConfig = {
     ConversationPage,
     FavouritePage,
     FeedbackPage,
-    SearchPractitionerPage
+    SearchPractitionerPage,
+    PracDashboardPage,
+    CreateSnapPage
 
   ],
   imports: [
@@ -94,7 +98,9 @@ const firebaseConfig = {
     ConversationPage,
     FavouritePage,
     FeedbackPage,
-    SearchPractitionerPage
+    SearchPractitionerPage,
+    PracDashboardPage,
+    CreateSnapPage
   ],
   providers: [
     FirebaseService,

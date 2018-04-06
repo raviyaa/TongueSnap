@@ -1,0 +1,30 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ 'CREATE_SNAP.TITLE' | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="createSnapForm">
+    <ion-list>
+      <ion-item>
+        <div padding>
+          <img [src]="base64Image" *ngIf="base64Image" />
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-textarea formControlName="description" placeholder="{{ 'CREATE_SNAP.TXT_DESCRIPTION' | translate }}"></ion-textarea>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <div padding>
+        <button ion-button color="primary" (click)="navigateToPracSearch()" block>{{ 'CREATE_SNAP.BTN_NEXT' | translate }}</button>
+      </div>
+    </ion-list>
+  </form>
+</ion-content>
