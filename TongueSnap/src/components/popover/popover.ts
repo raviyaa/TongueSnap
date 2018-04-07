@@ -1,3 +1,4 @@
+import { MessagePage } from './../../pages/message/message';
 import { PractitionerProfilePage } from './../../pages/practitioner-profile/practitioner-profile';
 import { Component } from '@angular/core';
 import { ViewController, NavParams, NavController, ToastController } from 'ionic-angular';
@@ -23,7 +24,8 @@ export class PopoverComponent {
     this.viewCtrl.dismiss();
   }
   message() {
-
+    this.dataService.setSelectedPractitioner(this.data);
+    this.navCtrl.push(MessagePage);
   }
   viewProfile() {
     this.dataService.setSelectedPractitioner(this.data);

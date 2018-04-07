@@ -1,0 +1,27 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>message</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+</ion-content>
+
+
+<ion-footer>
+  <ion-grid>
+    <form [formGroup]="messageForm" >
+      <ion-row>
+        <ion-col col-10>
+          <ion-input type="text" placeholder="Type a message" formControlName="message"></ion-input>
+        </ion-col>
+        <ion-col col-2 (click)="sendMessage()">
+          <ion-icon name="paper-plane"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-footer>

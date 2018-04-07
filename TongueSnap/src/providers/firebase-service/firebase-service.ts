@@ -16,11 +16,30 @@ export class FirebaseService {
     private camera: Camera) {
 
   }
+  pushMessageToConversation(key, msg) {
+    return this.afd.list('/conversations/' + key + '/messages').push(msg);
 
+  }
+  createConversation(key, cnv) {
+    //return this.afd.list('/snaps').push(snap);
+    return this.afd.object(`/conversations/${key}`).set(cnv);
+  }
+
+  getConversationsByKey(key) {
+    return this.afd.list('conversations', ref => ref.orderByChild('key').equalTo(key)).valueChanges();
+  }
+
+  getConversationsByUserId(userId) {
+    //return this.afd.list('conversations', ref => ref.orderByChild('senderId').equalTo(userId)).valueChanges();
+    return this.afd.list('conversations', ref => ref.orderByChild('senderId').equalTo(userId)).snapshotChanges().map(actions => {
+      return actions.map(action => ({ key: action.key, ...action.payload.val() }));
+    });
+
+  }
 
   getListOfSnapsByPractetionerId(userId) {
     return this.afd.list('snaps', ref => ref.orderByChild("practitioners").equalTo("-L9QCGuVqTgh_o7pJS-y")).valueChanges();
-   
+
   }
 
   getListOfSnapsByPatientId(userId) {
@@ -35,7 +54,7 @@ export class FirebaseService {
     return this.afd.list('/snaps/' + key + '/practitioners').push(practitioner);
     //return this.afd.object('/snaps/' + key + `/practitioners/${practitioner.key}`).set(practitioner);
   }
-  pushCommentToSnap(key,comment) {
+  pushCommentToSnap(key, comment) {
     //return this.afd.object('/snaps/' + key + `/commments/${userId}`).set(comment);
     return this.afd.list('/snaps/' + key + '/comments').push(comment);
     //return this.afd.object('/snaps/' + key + `/practitioners/${practitioner.key}`).set(practitioner);

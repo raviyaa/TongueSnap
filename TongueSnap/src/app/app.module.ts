@@ -33,6 +33,7 @@ import { CreateSnapPage } from '../pages/create-snap/create-snap';
 import { InquirePage } from '../pages/inquire/inquire';
 import { ViewSnapPage } from '../pages/view-snap/view-snap';
 import { PopoverComponent } from '../components/popover/popover';
+import { MessagePage } from '../pages/message/message';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -71,7 +72,8 @@ const firebaseConfig = {
     CreateSnapPage,
     InquirePage,
     ViewSnapPage,
-    PopoverComponent
+    PopoverComponent,
+    MessagePage
 
   ],
   imports: [
@@ -109,7 +111,8 @@ const firebaseConfig = {
     CreateSnapPage,
     InquirePage,
     ViewSnapPage,
-    PopoverComponent
+    PopoverComponent,
+    MessagePage
   ],
   providers: [
     FirebaseService,

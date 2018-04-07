@@ -5,6 +5,7 @@ export class DataService {
     selectedDescription;
     selectedInquire;
     selectedPractitioner;
+    selectedConversation;
 
     setSelectedUser(user) {
         this.selectedUser = user;
@@ -38,5 +39,11 @@ export class DataService {
     }
     getSelectedPractitioner() {
         return this.selectedPractitioner;
+    }
+    setSelectedConversation(conv) {
+        this.selectedConversation = conv;
+    }
+    getSelectedConversation() {
+        return this.selectedConversation;
     }
 }
