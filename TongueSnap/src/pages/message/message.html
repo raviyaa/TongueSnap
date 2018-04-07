@@ -7,13 +7,20 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-list *ngFor="let chat of chats">
+    <ion-item>
+      <ion-label>
+        <h3>{{chat?.message}}</h3>
+        <h4>{{user?.timeStamp}}</h4>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
-
 
 <ion-footer>
   <ion-grid>
-    <form [formGroup]="messageForm" >
+    <form [formGroup]="messageForm">
       <ion-row>
         <ion-col col-10>
           <ion-input type="text" placeholder="Type a message" formControlName="message"></ion-input>

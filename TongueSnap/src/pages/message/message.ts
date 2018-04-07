@@ -1,9 +1,12 @@
+import { SearchPractitionerPage } from './../search-practitioner/search-practitioner';
+import { DashboardPage } from './../dashboard/dashboard';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { DataService } from '../../providers/dataservice/dataservice';
 import * as _ from 'underscore';
 import { FirebaseService } from '../../providers/firebase-service/firebase-service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { APP_DI_CONFIG } from '../../app/app-config/app-config.constants';
 
 @IonicPage()
 @Component({
@@ -18,6 +21,8 @@ export class MessagePage {
   messageForm: FormGroup;
   isMsgSentBefore: Boolean = false;
   key: any;
+  chats: any[];
+  userKey: any;
   constructor(
     private navParams: NavParams,
     private fb: FormBuilder,
@@ -35,6 +40,7 @@ export class MessagePage {
     });
 
     this.selectedUser = this.dataService.getSelectedUser();
+    if (!_.isEmpty(this.selectedUser)) { this.userKey = this.selectedUser.key; console.log(this.userKey) }
     this.selectedPractitioner = this.dataService.getSelectedPractitioner();
     this.selectedConversation = this.dataService.getSelectedConversation();
     this.getConversationData();
@@ -42,25 +48,22 @@ export class MessagePage {
   getConversationData() {
     //this for convo loading
     if (!_.isEmpty(this.selectedConversation)) {
-      console.log('convo availbe');
-      this.firebaseService.getConversationsByKey(this.selectedUser.key).subscribe((res) => {
-        console.log(res);
-        //this.messages = res;
-      });
+      console.log('coonvo selected');
+      this.messages = this.selectedConversation.messages;
+      /* this.firebaseService.getConversationsByKey(this.selectedConversation.key).subscribe((res) => {
+        //this.messages = res[];
+      }); */
     } else {
       //this for dirct messaging btn
       if (!_.isEmpty(this.selectedUser) && !_.isEmpty(this.selectedPractitioner)) {
-        console.log('dir msg');
-        this.firebaseService.getConversationsByUserId(this.selectedUser.key).subscribe((res) => {
-          if (!_.isEmpty(res)) {
-            console.log(res);
-            /*  this.selectedConversation = res.filter(function (conv) {
-               return conv.reserverId === this.selectedPractitioner;
-             }); */
-          } else {
-            this.createToast("Messaging for the first time!!!");
-          }
-        });
+        console.log('inside');
+        if (this.selectedUser.type == APP_DI_CONFIG.TYPE_CLIENT) {
+          console.log('inside client');
+          this.findConversations(APP_DI_CONFIG.TYPE_CLIENT);
+        } else {
+          this.findConversations(APP_DI_CONFIG.TYPE_PRACTITIONER);
+        }
+
       } else {
         this.createToast("Something went wrong!!!");
       }
@@ -77,51 +80,102 @@ export class MessagePage {
     toast.present();
   }
 
+  findConversations(type) {
+    var pracId = this.selectedPractitioner.key;
+    console.log('dir msg');
+    console.log(type);
+    this.firebaseService.getConversationsByUserIdAndType(type, this.selectedUser.key).subscribe((res) => {
+      if (!_.isEmpty(res)) {
+        console.log(res);
+        if (type == APP_DI_CONFIG.TYPE_CLIENT) {
+          this.selectedConversation = res.filter(function (conv) {
+            return conv.practitioner === pracId;
+          });
+        } else {
+          this.selectedConversation = res.filter(function (conv) {
+            return conv.client === pracId;
+          });
+        }
+        if (!_.isEmpty(this.selectedConversation)) {
+          console.log('convo');
+          console.log(this.selectedConversation);
+          this.messages = this.selectedConversation[0].messages;
+          console.log('msg');
+          console.log(this.messages);
+          this.formatMessages(this.messages);
+        } else {
+          this.createToast("Messaging for the first time!!!");
+        }
+      } else {
+        this.createToast("Messaging for the first time!!!");
+      }
+    });
+  }
   sendMessage() {
     if (!_.isEmpty(this.selectedConversation)) {
-      console.log('if');
+      var msgObj = {
+        timeStamp: new Date(),
+        userId: this.selectedUser.key,
+        message: this.messageForm.value.message
+      };
+      this.pushToConversationByKey(this.selectedConversation[0].key, msgObj);
     } else {
-      //const key = "conv" + Math.floor(Date.now() / 1000);
-      if (this.isMsgSentBefore) {
-        console.log('is true');
-        var msgObj = {
-          timeStamp: new Date(),
-          senderId: this.selectedUser,
-          receiverId: this.selectedPractitioner,
-          message: this.messageForm.value.message
-        };
-        this.firebaseService.pushMessageToConversation(this.key, JSON.parse(JSON.stringify(msgObj))).then((msg) => {
-          this.isMsgSentBefore = true;
-          this.messageForm.reset();
-          this.createToast("Message sent");
-        }, error => {
-          this.createToast(error);
-        });
-      } else {
-        console.log('is false');
+      if (this.selectedUser.type == APP_DI_CONFIG.TYPE_CLIENT) {
         var convObj = {
           timeStamp: new Date(),
-          senderId: this.selectedUser,
-          receiverId: this.selectedPractitioner
+          client: this.selectedUser.key,
+          practitioner: this.selectedPractitioner.key
         }
-        this.firebaseService.createConversation(this.key, JSON.parse(JSON.stringify(convObj))).then((conv) => {
-          var msgObj = {
-            timeStamp: new Date(),
-            senderId: this.selectedUser,
-            receiverId: this.selectedPractitioner,
-            message: this.messageForm.value.message
-          };
-          this.firebaseService.pushMessageToConversation(this.key, JSON.parse(JSON.stringify(msgObj))).then((msg) => {
-            this.isMsgSentBefore = true;
-            this.messageForm.reset();
-            this.createToast("Message sent");
-          }, error => {
-            this.createToast(error);
-          });
-        }, error => {
-          this.createToast(error);
-        });
+        this.createConversation(convObj);
+      } else {
+        var convPracObj = {
+          timeStamp: new Date(),
+          client: this.selectedConversation.client,
+          practitioner: this.selectedUser.key
+        }
+        this.createConversation(convPracObj);
       }
+    }
+  }
+
+  createConversation(convObj) {
+    this.firebaseService.createConversation(this.key, JSON.parse(JSON.stringify(convObj))).then((conv) => {
+      var msgObj = {
+        timeStamp: new Date(),
+        userId: this.selectedUser.key,
+        message: this.messageForm.value.message
+      };
+      this.pushToConversationByKey(this.key, msgObj);
+    }, error => {
+      this.createToast(error);
+    });
+  }
+
+  pushToConversationByKey(key, msgObj) {
+    this.firebaseService.pushMessageToConversation(key, JSON.parse(JSON.stringify(msgObj))).then((msg) => {
+      this.isMsgSentBefore = true;
+      this.messageForm.reset();
+      this.createToast("Message sent");
+      this.navCtrl.push(SearchPractitionerPage);
+    }, error => {
+      this.createToast(error);
+    });
+  }
+
+  formatMessages(msgs) {
+    var chatModelArray = [];
+    if (!_.isEmpty(msgs)) {
+      _.each(msgs, function (msg, key) {
+        console.log(msg);
+        var chatModel = {
+          message: msg.message,
+          userId: msg.userId,
+          timeStamp: msg.timeStamp
+        }
+        chatModelArray.push(chatModel);
+      }.bind(this));
+      this.chats = chatModelArray;
+      console.log(this.chats);
     }
   }
 }

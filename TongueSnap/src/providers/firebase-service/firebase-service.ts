@@ -34,9 +34,14 @@ export class FirebaseService {
     return this.afd.list('conversations', ref => ref.orderByChild('senderId').equalTo(userId)).snapshotChanges().map(actions => {
       return actions.map(action => ({ key: action.key, ...action.payload.val() }));
     });
-
   }
-
+  getConversationsByUserIdAndType(type, userId) {
+    console.log("fdsdf" + type);
+    //return this.afd.list('conversations', ref => ref.orderByChild('senderId').equalTo(userId)).valueChanges();
+    return this.afd.list('conversations', ref => ref.orderByChild(type).equalTo(userId)).snapshotChanges().map(actions => {
+      return actions.map(action => ({ key: action.key, ...action.payload.val() }));
+    });
+  }
   getListOfSnapsByPractetionerId(userId) {
     return this.afd.list('snaps', ref => ref.orderByChild("practitioners").equalTo("-L9QCGuVqTgh_o7pJS-y")).valueChanges();
 
