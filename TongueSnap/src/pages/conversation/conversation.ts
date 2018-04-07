@@ -51,10 +51,12 @@ export class ConversationPage {
       }
       if (this.selectedUser.type == APP_DI_CONFIG.TYPE_PRACTITIONER) {
         this.firebaseService.getConversationsByUserIdAndType(this.selectedUser.type, this.selectedUser.key).subscribe((conversation) => {
+          console.log(conversation);
           if (!_.isEmpty(conversation)) {
-            if (this.selectedUser.type == APP_DI_CONFIG.TYPE_CLIENT) {
+            if (this.selectedUser.type == APP_DI_CONFIG.TYPE_PRACTITIONER) {
               _.each(conversation, function (conv, key) {
                 this.firebaseService.findUserByKey(conv.client).subscribe((user) => {
+                  console.log(user);
                   conv.user = user;
                 });
               }.bind(this));
