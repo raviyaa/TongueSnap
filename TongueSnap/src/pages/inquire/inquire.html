@@ -9,7 +9,7 @@
 
 <ion-content padding>
   <ion-list *ngFor="let inquire of inquires">
-    <ion-item>
+    <ion-item (click)="itemClicked(inquire)">
       <ion-avatar item-start>
         <img src={{inquire?.imageUrl}}>
       </ion-avatar>

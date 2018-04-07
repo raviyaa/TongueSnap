@@ -94,6 +94,12 @@
     "BTN_NEXT":"Next"
   },
   "INQUIRY":{
-    "TITLE":"Inquires"
+    "TITLE":"Inquire",
+    "VIEW_INQUIRY":{
+      "TITLE":"Comment",
+      "TXT_COMMENT":"Comment on this",
+      "BTN_COMMENT":"Comment",
+      "BTN_CANCEL":"Cancel"
+    }
   }
 }

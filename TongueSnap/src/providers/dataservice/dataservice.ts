@@ -3,6 +3,7 @@ export class DataService {
     selectedUser;
     selectedImage;
     selectedDescription;
+    selectedInquire;
 
     setSelectedUser(user) {
         this.selectedUser = user;
@@ -24,5 +25,11 @@ export class DataService {
 
     getSelectedDescription() {
         return this.selectedDescription;
+    }
+    setSelcetedInquire(inc) {
+        this.selectedInquire = inc;
+    }
+    getSelectedInquire() {
+        return this.selectedInquire;
     }
 }

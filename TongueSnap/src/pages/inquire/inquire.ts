@@ -1,3 +1,4 @@
+import { ViewSnapPage } from './../view-snap/view-snap';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import * as _ from 'underscore';
@@ -13,14 +14,14 @@ import { DataService } from '../../providers/dataservice/dataservice';
 export class InquirePage {
   user: any;
   inquires: any[];
-
+  selectedInquire: any;
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
     private toastCtrl: ToastController,
     private firebaseService: FirebaseService,
     private translateService: TranslateService,
-    private dataSerivce: DataService, ) {
+    private dataSerivce: DataService) {
   }
   ngOnInit() {
     this.getInitData();
@@ -60,4 +61,11 @@ export class InquirePage {
     });
     toast.present();
   }
+  itemClicked(item) {
+    console.log(item);
+    this.dataSerivce.setSelcetedInquire(item);
+    this.navCtrl.push(ViewSnapPage);
+    //this.presentPrompt();
+  }
+ 
 }

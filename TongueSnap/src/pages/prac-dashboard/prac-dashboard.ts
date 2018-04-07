@@ -12,8 +12,8 @@ import { ConversationPage } from '../conversation/conversation';
 })
 export class PracDashboardPage {
 
-  tab1Root = PractitionerProfilePage;
-  tab2Root = InquirePage;
+  tab1Root = InquirePage;
+  tab2Root = PractitionerProfilePage;
   tab3Root = ConversationPage;
   
   constructor(public navCtrl: NavController, public navParams: NavParams) {

@@ -33,6 +33,7 @@ export class FeedbackPage {
     this.user = this.dataSerivce.getSelectedUser();
     if (!_.isEmpty(this.user.key)) {
       this.firebaseService.getListOfSnapsByPatientId(this.user.key).subscribe((snaps) => {
+        console.log(snaps);
         this.snaps = snaps;
       }, error => {
         this.createToast(error);

@@ -24,7 +24,7 @@ export class FirebaseService {
   }
 
   getListOfSnapsByPatientId(userId) {
-    return this.afd.list('/snaps', ref => ref.orderByChild('patiendId').equalTo(userId)).valueChanges();
+    return this.afd.list('snaps', ref => ref.orderByChild('patientId').equalTo(userId)).valueChanges();
   }
 
   createSnap(key, snap) {
@@ -33,6 +33,10 @@ export class FirebaseService {
   }
   pushPractitionerToSnap(key, practitioner) {
     return this.afd.list('/snaps/' + key + '/practitioners').push(practitioner);
+    //return this.afd.object('/snaps/' + key + `/practitioners/${practitioner.key}`).set(practitioner);
+  }
+  pushCommentToSnap(key, comment) {
+    return this.afd.list('/snaps/' + key + '/commments').push(comment);
     //return this.afd.object('/snaps/' + key + `/practitioners/${practitioner.key}`).set(practitioner);
   }
 
@@ -66,7 +70,9 @@ export class FirebaseService {
   }
 
   getListOfSnaps() {
-    return this.afd.list('/snaps').valueChanges();
+    return this.afd.list('/snaps').snapshotChanges().map(actions => {
+      return actions.map(action => ({ key: action.key, ...action.payload.val() }));
+    });
   }
 
   createUser(user) {
