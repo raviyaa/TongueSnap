@@ -1,0 +1,28 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ 'INQUIRY.TITLE' | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <div padding>
+        <img [src]="base64Image" *ngIf="base64Image" />
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <h2>{{selectedInquire?.description}}</h2>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <div padding>
+      <button ion-button color="primary" (click)="comment()" block>{{ 'INQUIRY.VIEW_INQUIRY.BTN_COMMENT' | translate }}</button>
+    </div>
+  </ion-list>
+</ion-content>
