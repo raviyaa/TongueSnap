@@ -32,6 +32,7 @@ import { PracDashboardPage } from '../pages/prac-dashboard/prac-dashboard';
 import { CreateSnapPage } from '../pages/create-snap/create-snap';
 import { InquirePage } from '../pages/inquire/inquire';
 import { ViewSnapPage } from '../pages/view-snap/view-snap';
+import { PopoverComponent } from '../components/popover/popover';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -69,7 +70,8 @@ const firebaseConfig = {
     PracDashboardPage,
     CreateSnapPage,
     InquirePage,
-    ViewSnapPage
+    ViewSnapPage,
+    PopoverComponent
 
   ],
   imports: [
@@ -106,7 +108,8 @@ const firebaseConfig = {
     PracDashboardPage,
     CreateSnapPage,
     InquirePage,
-    ViewSnapPage
+    ViewSnapPage,
+    PopoverComponent
   ],
   providers: [
     FirebaseService,

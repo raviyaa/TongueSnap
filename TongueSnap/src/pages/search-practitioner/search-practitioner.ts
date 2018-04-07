@@ -3,13 +3,13 @@ import { PractitionerProfilePage } from './../practitioner-profile/practitioner-
 import { DataService } from './../../providers/dataservice/dataservice';
 import { Component } from '@angular/core';
 import { storage } from 'firebase';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, PopoverController } from 'ionic-angular';
 import { FirebaseService } from '../../providers/firebase-service/firebase-service';
 import { TranslateService } from '@ngx-translate/core';
 import { APP_DI_CONFIG } from '../../app/app-config/app-config.constants';
 import * as async from 'async';
 import * as _ from 'underscore';
-
+import { PopoverComponent } from '../../components/popover/popover';
 
 @IonicPage()
 @Component({
@@ -30,7 +30,8 @@ export class SearchPractitionerPage {
     private toastCtrl: ToastController,
     private firebaseService: FirebaseService,
     private translateService: TranslateService,
-    private dataService: DataService
+    private dataService: DataService,
+    private popoverCtrl: PopoverController
   ) {
   }
 
@@ -131,5 +132,12 @@ export class SearchPractitionerPage {
     } else {
       this.createToast("Please select practitioners");
     }
+  }
+
+  presentPopover(myEvent, data) {
+    let popover = this.popoverCtrl.create(PopoverComponent, data);
+    popover.present({
+      ev: myEvent
+    });
   }
 }

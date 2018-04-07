@@ -6,6 +6,7 @@ import { FirebaseService } from '../../providers/firebase-service/firebase-servi
 import { FormBuilder } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { CallNumber } from '@ionic-native/call-number';
+import * as _ from 'underscore';
 
 @IonicPage()
 @Component({
@@ -13,7 +14,7 @@ import { CallNumber } from '@ionic-native/call-number';
   templateUrl: 'practitioner-profile.html',
 })
 export class PractitionerProfilePage {
-  user: User;
+  user: any;
 
   constructor(
     private navCtrl: NavController,
@@ -34,18 +35,26 @@ export class PractitionerProfilePage {
 
   }
   loadSelectedUser() {
-    this.user = this.dataService.getSelectedUser();
-    console.log(this.user);
+    this.user = !_.isEmpty(this.dataService.getSelectedPractitioner()) ? this.dataService.getSelectedPractitioner() : this.dataService.getSelectedUser();
   }
 
   goToCall() {
-    console.log('call');
-    //encodeURIComponent('13464834348');
-    this.callNumber.callNumber("18001010101", true)
-      .then(res => alert(res))
-      .catch(err => alert(err));
+    if (!_.isEmpty(this.user.phone)) {
+      this.callNumber.callNumber(this.user.phone, true)
+        .then(res => alert(res))
+        .catch(err => alert(err));
+    } else {
+      this.createToast("No Tel available");
+    }
   }
-
+  createToast(message) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
+  }
   makeAppoinment() {
     console.log('make appoinment');
   }

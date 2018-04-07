@@ -4,6 +4,7 @@ export class DataService {
     selectedImage;
     selectedDescription;
     selectedInquire;
+    selectedPractitioner;
 
     setSelectedUser(user) {
         this.selectedUser = user;
@@ -31,5 +32,11 @@ export class DataService {
     }
     getSelectedInquire() {
         return this.selectedInquire;
+    }
+    setSelectedPractitioner(prac) {
+        this.selectedPractitioner = prac;
+    }
+    getSelectedPractitioner() {
+        return this.selectedPractitioner;
     }
 }
