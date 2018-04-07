@@ -6,7 +6,16 @@
 
 </ion-header>
 
-
 <ion-content padding>
-
-</ion-content>
+  <ion-list *ngFor="let conv of conversation">
+    <ion-item (click)="convClicled(conv)">
+      <ion-avatar item-start>
+        <img src={{conv?.user?.avatarUrl}}>
+      </ion-avatar>
+      <ion-label>
+        <h2>{{conv?.user?.name}}</h2>
+        <h3>{{conv?.user?.title}}</h3>
+        <p>{{conv?.user?.location}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>

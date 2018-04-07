@@ -12,7 +12,6 @@ import { DataService } from '../../providers/dataservice/dataservice';
 import * as _ from 'underscore';
 import { APP_DI_CONFIG } from '../../app/app-config/app-config.constants';
 import { PracDashboardPage } from '../prac-dashboard/prac-dashboard';
-import { SearchPractitionerPage } from '../search-practitioner/search-practitioner';
 
 @IonicPage()
 @Component({
@@ -55,7 +54,7 @@ export class LoginPage {
           this.dataService.setSelectedUser(this.currentUser);
           console.log(this.currentUser);
           if (this.currentUser.type == APP_DI_CONFIG.TYPE_CLIENT) {
-            this.navCtrl.push(SearchPractitionerPage);
+            this.navCtrl.push(DashboardPage);
           } else if (this.currentUser.type == APP_DI_CONFIG.TYPE_PRACTITIONER) {
             this.navCtrl.push(PracDashboardPage);
           } else {

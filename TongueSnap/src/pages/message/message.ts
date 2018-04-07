@@ -1,3 +1,4 @@
+import { ConversationPage } from './../conversation/conversation';
 import { SearchPractitionerPage } from './../search-practitioner/search-practitioner';
 import { DashboardPage } from './../dashboard/dashboard';
 import { Component } from '@angular/core';
@@ -49,10 +50,9 @@ export class MessagePage {
     //this for convo loading
     if (!_.isEmpty(this.selectedConversation)) {
       console.log('coonvo selected');
-      this.messages = this.selectedConversation.messages;
-      /* this.firebaseService.getConversationsByKey(this.selectedConversation.key).subscribe((res) => {
-        //this.messages = res[];
-      }); */
+      this.messages = this.selectedConversation[0].messages;
+      this.formatMessages(this.messages);
+
     } else {
       //this for dirct messaging btn
       if (!_.isEmpty(this.selectedUser) && !_.isEmpty(this.selectedPractitioner)) {
@@ -156,7 +156,8 @@ export class MessagePage {
       this.isMsgSentBefore = true;
       this.messageForm.reset();
       this.createToast("Message sent");
-      this.navCtrl.push(SearchPractitionerPage);
+      this.navCtrl.push(ConversationPage);
+      this.dataService.setSelectedConversation([]);
     }, error => {
       this.createToast(error);
     });
