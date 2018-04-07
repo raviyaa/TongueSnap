@@ -14,6 +14,7 @@ import * as _ from 'underscore';
 export class ViewSnapPage {
 
   selectedInquire: any;
+  selectedUser: any;
   base64Image: string;
 
   constructor(
@@ -31,6 +32,8 @@ export class ViewSnapPage {
   }
   ngOnInit() {
     this.selectedInquire = this.dataSerivce.getSelectedInquire();
+    this.selectedUser = this.dataSerivce.getSelectedUser();
+    console.log(this.selectedUser.key);
     this.base64Image = this.selectedInquire.imageUrl;
   }
 
@@ -58,7 +61,11 @@ export class ViewSnapPage {
           text: 'Comment',
           handler: data => {
             if (!_.isEmpty(data.comment)) {
-              this.firebaseService.pushCommentToSnap(this.selectedInquire.key, data.comment).then((snap) => {
+              var commentObj = {
+                practitioner : this.selectedUser,
+                comment: data.comment
+              };
+              this.firebaseService.pushCommentToSnap(this.selectedInquire.key,commentObj).then((snap) => {
                 console.log(snap);
                 this.navCtrl.push(PracDashboardPage);
               }, error => {

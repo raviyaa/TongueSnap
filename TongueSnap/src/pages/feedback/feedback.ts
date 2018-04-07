@@ -33,6 +33,19 @@ export class FeedbackPage {
     this.user = this.dataSerivce.getSelectedUser();
     if (!_.isEmpty(this.user.key)) {
       this.firebaseService.getListOfSnapsByPatientId(this.user.key).subscribe((snaps) => {
+        if (!_.isEmpty(snaps)) {
+          var formattedComments = [];
+          let commentString;
+          _.each(snaps, function (snap, key) {
+            if (!_.isEmpty(snap.comments)) {
+              _.each(snap.comments, function (comm, key) {
+                commentString = comm.comment + " By " + comm.practitioner.name;
+                formattedComments.push(commentString);
+              }.bind(this));
+              snap.formattedComments = formattedComments;
+            }
+          }.bind(this));
+        }
         console.log(snaps);
         this.snaps = snaps;
       }, error => {

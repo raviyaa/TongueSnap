@@ -14,7 +14,12 @@
         <img src={{snap?.imageUrl}}>
       </ion-avatar>
       <h2>{{snap?.description}}</h2>
-      <p>{{snap?.comment}}</p>
+      <h3 *ngIf="snap.formattedComments!=null">Comments</h3>
+      <ul>
+        <li *ngFor="let comm of snap.formattedComments">
+          {{comm}}
+        </li>
+      </ul>
     </ion-item>
   </ion-list>
   <ion-list>

@@ -35,8 +35,9 @@ export class FirebaseService {
     return this.afd.list('/snaps/' + key + '/practitioners').push(practitioner);
     //return this.afd.object('/snaps/' + key + `/practitioners/${practitioner.key}`).set(practitioner);
   }
-  pushCommentToSnap(key, comment) {
-    return this.afd.list('/snaps/' + key + '/commments').push(comment);
+  pushCommentToSnap(key,comment) {
+    //return this.afd.object('/snaps/' + key + `/commments/${userId}`).set(comment);
+    return this.afd.list('/snaps/' + key + '/comments').push(comment);
     //return this.afd.object('/snaps/' + key + `/practitioners/${practitioner.key}`).set(practitioner);
   }
 
