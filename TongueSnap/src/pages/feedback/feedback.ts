@@ -34,10 +34,10 @@ export class FeedbackPage {
     if (!_.isEmpty(this.user.key)) {
       this.firebaseService.getListOfSnapsByPatientId(this.user.key).subscribe((snaps) => {
         if (!_.isEmpty(snaps)) {
-          var formattedComments = [];
-          let commentString;
           _.each(snaps, function (snap, key) {
             if (!_.isEmpty(snap.comments)) {
+              var formattedComments = [];
+              let commentString;
               _.each(snap.comments, function (comm, key) {
                 commentString = comm.comment + " By " + comm.practitioner.name;
                 formattedComments.push(commentString);
@@ -60,22 +60,23 @@ export class FeedbackPage {
   }
 
   openCamera() {
-    this.dataSerivce.setSelectedImage("no image");
-    this.navCtrl.push(CreateSnapPage);
-    /*  const cameraOptions: CameraOptions = {
-       quality: 50,
-       destinationType: this.camera.DestinationType.DATA_URL,
-       encodingType: this.camera.EncodingType.JPEG,
-       mediaType: this.camera.MediaType.PICTURE,
-     };
- 
-     this.camera.getPicture(cameraOptions).then((imageData) => {
-       this.base64Image = 'data:image/jpeg;base64,' + imageData;
-       this.dataSerivce.setSelectedImage(this.base64Image);
-       this.navCtrl.push(CreateSnapPage);
-     }, (error) => {
-       this.createToast(error);
-     }); */
+    /* this.dataSerivce.setSelectedImage("no image");
+    this.navCtrl.push(CreateSnapPage); */
+    const cameraOptions: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true
+    };
+
+    this.camera.getPicture(cameraOptions).then((imageData) => {
+      this.base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.dataSerivce.setSelectedImage(this.base64Image);
+      this.navCtrl.push(CreateSnapPage);
+    }, (error) => {
+      this.createToast(error);
+    });
   }
 
   createToast(message) {

@@ -80,4 +80,7 @@ export class LoginPage {
     });
     toast.present();
   }
+  ngOnDestroy(): void {
+    this.loginForm.reset();
+  }
 }

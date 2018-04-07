@@ -36,7 +36,8 @@ export class CreateSnapPage {
       this.navCtrl.push(SearchPractitionerPage);
     }
     else {
-      this.createToast("Something went wrong!");
+      if (_.isEmpty(this.createSnapForm.value.description)) { this.createToast("Description cannot be empty"); }
+      else { this.createToast("Something went wrong!"); }
     }
   }
   createToast(message) {

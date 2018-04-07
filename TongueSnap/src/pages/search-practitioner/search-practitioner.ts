@@ -2,6 +2,7 @@ import { DashboardPage } from './../dashboard/dashboard';
 import { PractitionerProfilePage } from './../practitioner-profile/practitioner-profile';
 import { DataService } from './../../providers/dataservice/dataservice';
 import { Component } from '@angular/core';
+import { storage } from 'firebase';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FirebaseService } from '../../providers/firebase-service/firebase-service';
 import { TranslateService } from '@ngx-translate/core';
@@ -20,6 +21,7 @@ export class SearchPractitionerPage {
   users: any[];
   selectedPractitioners: any[] = [];
   selectedImage: string;
+  uploadedImageUrl: string;
   selectedDescription: string;
   selectedUser: any;
 
@@ -47,38 +49,18 @@ export class SearchPractitionerPage {
       this.users = users;
     });
   }
-  practitionerSelected(user) {
-    this.dataService.setSelectedUser(user);
-    this.navCtrl.push(PractitionerProfilePage);
-  }
+
   sendToPractitioners() {
-    if (!_.isEmpty(this.selectedImage) && !_.isEmpty(this.selectedDescription) && !_.isEmpty(this.selectedPractitioners)) {
-
-      var snapObj = {
-        imageUrl: this.selectedImage,
-        description: this.selectedDescription,
-        practitioners: this.selectedPractitioners,
-        patientId: this.selectedUser.key
-      };
-      const key = APP_DI_CONFIG.KEY_SNAP + Math.floor(Date.now() / 1000);
-      this.firebaseService.createSnap(key, snapObj).then((user) => {
-        this.navCtrl.push(DashboardPage);
-      }, error => {
-        this.createToast(error);
-      });
-
-    } else {
-      this.createToast("Please select practitioners");
-    }
-
-
+    this.upload();
   }
 
   getItems(ev: any) {
     let val = ev.target.value;
     if (val && val.trim() != '') {
       this.users = this.users.filter((item) => {
-        return (item.location.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        if (!_.isEmpty(item.location)) {
+          return (item.location.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        }
       })
     }
     else {
@@ -103,5 +85,51 @@ export class SearchPractitionerPage {
       position: 'top'
     });
     toast.present();
+  }
+  practitionerSelected(object) {
+    this.createToast("object");
+  }
+
+
+  upload() {
+    if (!_.isEmpty(this.selectedImage)) {
+      let storageRef = storage().ref();
+      const filename = Math.floor(Date.now() / 1000);
+      const imageRef = storageRef.child(`snaps/${filename}.jpg`);
+      this.firebaseService.uploadImage(this.selectedImage, imageRef).then((res) => {
+        if (res) {
+          this.firebaseService.getImageUrl(imageRef).then((url) => {
+            console.log(url);
+            this.uploadedImageUrl = url;
+            this.createSnap();
+          }, (error) => {
+            this.createToast(error);
+          });
+        }
+      }, error => {
+        this.createToast(error);
+      });
+    } else {
+      this.createToast("Something went wrong");
+    }
+  }
+  createSnap() {
+    if (!_.isEmpty(this.selectedImage) && !_.isEmpty(this.uploadedImageUrl) && !_.isEmpty(this.selectedDescription) && !_.isEmpty(this.selectedPractitioners)) {
+      var snapObj = {
+        imageUrl: this.uploadedImageUrl,
+        description: this.selectedDescription,
+        practitioners: this.selectedPractitioners,
+        patientId: this.selectedUser.key
+      };
+      const key = APP_DI_CONFIG.KEY_SNAP + Math.floor(Date.now() / 1000);
+      this.firebaseService.createSnap(key, snapObj).then((user) => {
+        this.navCtrl.push(DashboardPage);
+      }, error => {
+        this.createToast(error);
+      });
+
+    } else {
+      this.createToast("Please select practitioners");
+    }
   }
 }

@@ -33,7 +33,22 @@ export class InquirePage {
       this.firebaseService.getListOfSnaps().subscribe((snaps) => {
         if (!_.isEmpty(snaps)) {
           _.each(snaps, function (snap, key) {
+
             if (!_.isEmpty(snap.practitioners)) {
+              if (!_.isEmpty(snap.comments)) {
+                var formattedComments = [];
+                let commentString;
+                _.each(snap.comments, function (comm, key) {
+                  if (!_.isEmpty(comm.practitioner)) {
+                    if (comm.practitioner.key === this.user.key) {
+                      commentString = comm.comment;
+                      formattedComments.push(commentString);
+                    }
+                  }
+                }.bind(this));
+                snap.formattedComments = formattedComments;
+              }
+
               var practitioners = snap.practitioners;
               _.each(practitioners, function (prac, key) {
                 if (prac.key === this.user.key) {
@@ -41,8 +56,10 @@ export class InquirePage {
                 }
               }.bind(this));
             }
+
           }.bind(this));
         }
+        console.log(filteredSnaps);
         this.inquires = filteredSnaps;
       }, error => {
         this.createToast(error);
@@ -65,7 +82,6 @@ export class InquirePage {
     console.log(item);
     this.dataSerivce.setSelcetedInquire(item);
     this.navCtrl.push(ViewSnapPage);
-    //this.presentPrompt();
   }
- 
+
 }

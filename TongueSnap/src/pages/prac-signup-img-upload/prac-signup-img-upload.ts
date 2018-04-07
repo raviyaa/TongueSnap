@@ -31,7 +31,7 @@ export class PracSignupImgUploadPage {
     //this.user = this.dataService.getSelectedUser();
   }
   capture() {
-   /*  const cameraOptions: CameraOptions = {
+    const cameraOptions: CameraOptions = {
       quality: 50,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
@@ -43,11 +43,11 @@ export class PracSignupImgUploadPage {
       this.base64Image = 'data:image/jpeg;base64,' + imageData;
     }, (error) => {
       this.createToast(error);
-    }); */
+    });
   }
 
   upload() {
-   /*  if (!_.isEmpty(this.base64Image)) {
+    if (!_.isEmpty(this.base64Image)) {
       let storageRef = storage().ref();
       const filename = Math.floor(Date.now() / 1000);
       const imageRef = storageRef.child(`avatars/${filename}.jpg`);
@@ -84,7 +84,7 @@ export class PracSignupImgUploadPage {
       });
     } else {
       this.createToast("Something went wrong");
-    } */
+    }
   }
 
   showSuccesfulUploadAlert() {
