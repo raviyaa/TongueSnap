@@ -33,6 +33,7 @@ export class FirebaseService {
   }
   pushPractitionerToSnap(key, practitioner) {
     return this.afd.list('/snaps/' + key + '/practitioners').push(practitioner);
+    //return this.afd.object('/snaps/' + key + `/practitioners/${practitioner.key}`).set(practitioner);
   }
 
   fingUsersByType(type) {

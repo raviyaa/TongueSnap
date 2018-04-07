@@ -63,15 +63,6 @@ export class SearchPractitionerPage {
       const key = APP_DI_CONFIG.KEY_SNAP + Math.floor(Date.now() / 1000);
       this.firebaseService.createSnap(key, snapObj).then((user) => {
         this.navCtrl.push(DashboardPage);
-        /*  async.eachSeries(this.selectedPractitioners, function (prac, cb) {
-           this.firebaseService.pushPractitionerToSnap(key, prac).then((user) => {
-             cb();
-           }, error => {
-             this.createToast(error);
-           });
-         }, function () {
-           this.navCtrl.push(DashboardPage);
-         }); */
       }, error => {
         this.createToast(error);
       });

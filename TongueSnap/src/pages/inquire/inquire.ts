@@ -12,7 +12,7 @@ import { DataService } from '../../providers/dataservice/dataservice';
 })
 export class InquirePage {
   user: any;
-  inquies: any[];
+  inquires: any[];
 
   constructor(
     private navCtrl: NavController,
@@ -26,6 +26,7 @@ export class InquirePage {
     this.getInitData();
   }
   getInitData() {
+    var filteredSnaps = [];
     this.user = this.dataSerivce.getSelectedUser();
     if (!_.isEmpty(this.user.key)) {
       this.firebaseService.getListOfSnaps().subscribe((snaps) => {
@@ -35,13 +36,13 @@ export class InquirePage {
               var practitioners = snap.practitioners;
               _.each(practitioners, function (prac, key) {
                 if (prac.key === this.user.key) {
-                  console.log(snap);
-                  this.snap.push(snap);
+                  filteredSnaps.push(snap);
                 }
-              });
+              }.bind(this));
             }
-          });
+          }.bind(this));
         }
+        this.inquires = filteredSnaps;
       }, error => {
         this.createToast(error);
       });
