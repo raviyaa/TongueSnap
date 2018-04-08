@@ -17,7 +17,8 @@ export class PracSignupImgUploadPage {
 
   base64Image: string = "./assets/img/profile.png";
   image: string;
-  user: User;
+  user: any;
+
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
@@ -28,7 +29,7 @@ export class PracSignupImgUploadPage {
     private dataService: DataService) {
   }
   ngOnInit() {
-    //this.user = this.dataService.getSelectedUser();
+    this.user = this.dataService.getSelectedUser();
   }
   capture() {
     const cameraOptions: CameraOptions = {
@@ -54,26 +55,27 @@ export class PracSignupImgUploadPage {
       this.firebaseService.uploadImage(this.base64Image, imageRef).then((res) => {
         if (res) {
           this.firebaseService.getImageUrl(imageRef).then((url) => {
-            console.log(url);
-            this.user.avatarUrl = url;
-
-            this.firebaseService.createUserAuth(this.user).then((user) => {
-              console.log(user);
-              if (!_.isEmpty(user)) {
-                if (!_.isEmpty(this.user)) {
-                  this.firebaseService.createUser(this.user).then((user) => {
-                    console.log('navigate to user profile');
-                    console.log(user.key);
-                    this.createToast("Regristration Success!");
-                    this.navCtrl.push(PractitionerProfilePage);
-                  });
-                } else {
-                  this.createToast("Something went wrong");
+            if (!_.isEmpty(url)) {
+              console.log(url);
+              this.user.avatarUrl = url;
+              this.firebaseService.createUserAuth(this.user).then((user) => {
+                console.log(user);
+                if (!_.isEmpty(user)) {
+                  if (!_.isEmpty(this.user)) {
+                    this.firebaseService.createUser(this.user).then((user) => {
+                      console.log('navigate to user profile');
+                      console.log(user.key);
+                      this.createToast("Regristration Success!");
+                      this.navCtrl.push(PractitionerProfilePage);
+                    });
+                  } else {
+                    this.createToast("Something went wrong");
+                  }
                 }
-              }
-            }, error => {
-              this.createToast(error);
-            });
+              }, error => {
+                this.createToast(error);
+              });
+            }
             //this.showSuccesfulUploadAlert();
           }, (error) => {
             this.createToast(error);

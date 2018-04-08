@@ -29,7 +29,7 @@ export class InquirePage {
   getInitData() {
     var filteredSnaps = [];
     this.user = this.dataSerivce.getSelectedUser();
-    if (!_.isEmpty(this.user.key)) {
+    if (!_.isEmpty(this.user)) {
       this.firebaseService.getListOfSnaps().subscribe((snaps) => {
         if (!_.isEmpty(snaps)) {
           _.each(snaps, function (snap, key) {

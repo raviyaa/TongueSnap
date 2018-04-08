@@ -31,14 +31,14 @@ export class FeedbackPage {
   }
   getInitData() {
     this.user = this.dataSerivce.getSelectedUser();
-    if (!_.isEmpty(this.user.key)) {
+    if (!_.isEmpty(this.user)) {
       this.firebaseService.getListOfSnapsByPatientId(this.user.key).subscribe((snaps) => {
         if (!_.isEmpty(snaps)) {
           _.each(snaps, function (snap, key) {
             if (!_.isEmpty(snap.comments)) {
               var formattedComments = [];
               let commentString;
-              _.each(snap.comments, function (comm, key) {
+              _.each(snap.comments, function (comm, key1) {
                 commentString = comm.comment + " By " + comm.practitioner.name;
                 formattedComments.push(commentString);
               }.bind(this));
@@ -46,13 +46,12 @@ export class FeedbackPage {
             }
           }.bind(this));
         }
-        console.log(snaps);
         this.snaps = snaps;
       }, error => {
         this.createToast(error);
       });
     } else {
-      this.createToast("Something went wrong!");
+      this.createToast("You have no prevois snaps!");
     }
   }
   ionViewDidLoad() {

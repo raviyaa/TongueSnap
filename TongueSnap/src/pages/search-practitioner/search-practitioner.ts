@@ -123,7 +123,7 @@ export class SearchPractitionerPage {
         patientId: this.selectedUser.key
       };
       const key = APP_DI_CONFIG.KEY_SNAP + Math.floor(Date.now() / 1000);
-      this.firebaseService.createSnap(key, snapObj).then((user) => {
+      this.firebaseService.createSnap(key, JSON.parse(JSON.stringify(snapObj))).then((user) => {
         this.navCtrl.push(DashboardPage);
       }, error => {
         this.createToast(error);
