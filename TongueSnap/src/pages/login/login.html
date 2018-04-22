@@ -8,19 +8,22 @@
 
 
 <ion-content>
-  <h2 align = "center">{{ 'TITLE' | translate }}</h2>
-  <p align = "center">{{ 'SUBTITLE' | translate }}</p>
-  <form  [formGroup]="loginForm" (submit)="doLogin()">
+  <h2 align="center">{{ 'TITLE' | translate }}</h2>
+  <p align="center">{{ 'SUBTITLE' | translate }}</p>
+  <form [formGroup]="loginForm" (submit)="doLogin()">
     <ion-list>
 
       <ion-item>
-        <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
+        <ion-label icon-left>
+          <ion-icon name="mail"></ion-icon> {{ 'EMAIL' | translate }}</ion-label>
         <ion-input type="email" formControlName="email"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
-        <ion-input type="password"  formControlName="password"></ion-input>
+        <ion-label icon-left>
+          <ion-icon name="key"></ion-icon>
+          {{ 'PASSWORD' | translate }}</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
 
       <div padding>
@@ -29,6 +32,6 @@
 
     </ion-list>
   </form>
-  <p align = "center" >{{ 'FORGOTPWD' | translate }}</p>
-  <p align = "center" (click)="signUp()" >{{ 'CREATENEW' | translate }}</p>
+  <p align="center">{{ 'FORGOTPWD' | translate }}</p>
+  <p align="center" (click)="signUp()">{{ 'CREATENEW' | translate }}</p>
 </ion-content>

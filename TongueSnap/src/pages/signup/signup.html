@@ -8,33 +8,43 @@
 
 
 <ion-content>
-    <h2 align = "center">{{ 'TITLE' | translate }}</h2>
-    <p align = "center">{{ 'SUBTITLE' | translate }}</p>
-  <form   [formGroup]="signUpForm" (submit)="doSignup()">
+  <h2 align="center">{{ 'TITLE' | translate }}</h2>
+  <p align="center">{{ 'SUBTITLE' | translate }}</p>
+  <form [formGroup]="signUpForm" (submit)="doSignup()">
     <ion-list>
 
       <ion-item>
-        <ion-label fixed>{{ 'NAME' | translate }}</ion-label>
-        <ion-input type="text"  formControlName="name"></ion-input>
+        <ion-label icon-left>
+          <ion-icon name="person"></ion-icon>
+          {{ 'NAME' | translate }}</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
+        <ion-label icon-left>
+          <ion-icon name="mail"></ion-icon>
+          {{ 'EMAIL' | translate }}</ion-label>
         <ion-input type="email" formControlName="email"></ion-input>
       </ion-item>
       <ion-item>
-          <ion-label fixed>{{ 'LOCATION' | translate }}</ion-label>
-          <ion-input type="text" formControlName="location"></ion-input>
-        </ion-item>
-    
+        <ion-label icon-left>
+          <ion-icon name="locate"></ion-icon>
+          {{ 'LOCATION' | translate }}</ion-label>
+        <ion-input type="text" formControlName="location"></ion-input>
+      </ion-item>
+
       <ion-item>
-        <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
+        <ion-label icon-left>
+          <ion-icon name="key"></ion-icon>
+          {{ 'PASSWORD' | translate }}</ion-label>
         <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
       <ion-item>
-          <ion-label fixed>{{ 'REPASSWORD' | translate }}</ion-label>
-          <ion-input type="password"  formControlName="repassword"></ion-input>
-        </ion-item>
+        <ion-label icon-left>
+          <ion-icon name="key"></ion-icon>
+          {{ 'REPASSWORD' | translate }}</ion-label>
+        <ion-input type="password" formControlName="repassword"></ion-input>
+      </ion-item>
       <div padding>
         <button ion-button color="primary" block>{{ 'SIGNUP_BUTTON' | translate }}</button>
       </div>
