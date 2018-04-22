@@ -14,48 +14,50 @@
       <ion-item>
         <ion-label icon-left>
           <ion-icon name="person"></ion-icon>
-          {{ 'PRACTITIONER_PROFILE.SIGNUP.NAME' | translate }}</ion-label>
-        <ion-input type="text" formControlName="name"></ion-input>
+        </ion-label>
+        <ion-input type="text" formControlName="name" placeholder="{{ 'PRACTITIONER_PROFILE.SIGNUP.NAME' | translate }}"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label icon-left>
           <ion-icon name="mail"></ion-icon>
-          {{ 'EMAIL' | translate }}</ion-label>
-        <ion-input type="email" formControlName="email"></ion-input>
+        </ion-label>
+        <ion-input type="email" formControlName="email" placeholder="{{ 'EMAIL' | translate }}"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label icon-left>
           <ion-icon name="school"></ion-icon>
-          {{ 'PRACTITIONER_PROFILE.SIGNUP.TITLE' | translate }}</ion-label>
-        <ion-input type="text" formControlName="title"></ion-input>
+        </ion-label>
+        <ion-input type="text" formControlName="title" placeholder="{{ 'PRACTITIONER_PROFILE.SIGNUP.TITLE' | translate }}"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label fixed>{{ 'PRACTITIONER_PROFILE.SIGNUP.SPECIALITY' | translate }}</ion-label>
-        <ion-input type="text" formControlName="speciality"></ion-input>
+        <ion-label icon-left>
+          <ion-icon name="ribbon"></ion-icon>
+        </ion-label>
+        <ion-input type="text" formControlName="speciality" placeholder="{{ 'PRACTITIONER_PROFILE.SIGNUP.SPECIALITY' | translate }}"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label icon-left>
           <ion-icon name="information-circle"></ion-icon>
-          {{ 'PRACTITIONER_PROFILE.SIGNUP.SHORTBIO' | translate }}</ion-label>
-        <ion-input type="text" formControlName="bio"></ion-input>
+        </ion-label>
+        <ion-input type="text" formControlName="bio" placeholder="{{ 'PRACTITIONER_PROFILE.SIGNUP.SHORTBIO' | translate }}"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label icon-left>
           <ion-icon name="key"></ion-icon>
-          {{ 'PRACTITIONER_PROFILE.SIGNUP.PASSWORD' | translate }}</ion-label>
-        <ion-input type="password" formControlName="password"></ion-input>
+        </ion-label>
+        <ion-input type="password" formControlName="password" placeholder="{{ 'PRACTITIONER_PROFILE.SIGNUP.PASSWORD' | translate }}"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label icon-left>
           <ion-icon name="key"></ion-icon>
-          {{ 'PRACTITIONER_PROFILE.SIGNUP.REPASSWORD' | translate }}</ion-label>
-        <ion-input type="password" formControlName="repassword"></ion-input>
+        </ion-label>
+        <ion-input type="password" formControlName="repassword" placeholder="{{ 'PRACTITIONER_PROFILE.SIGNUP.REPASSWORD' | translate }}"></ion-input>
       </ion-item>
       <div padding>
         <button ion-button color="primary" block>{{ 'PRACTITIONER_PROFILE.SIGNUP.BTN_NEXT' | translate }}</button>

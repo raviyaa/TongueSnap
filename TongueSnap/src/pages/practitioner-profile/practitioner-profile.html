@@ -14,7 +14,8 @@
     </ion-avatar>
     <h2>{{user?.name}}</h2>
     <h3>{{user?.title}}</h3>
-    <p>{{user?.location}}</p>
+    <p icon-left>
+      <ion-icon name="locate"></ion-icon>{{user?.location}}</p>
     <button ion-button color="light" (click)="goToCall()">{{ 'PRACTITIONER_PROFILE.BTN_TALK' | translate }}</button>
     <button ion-button color="light" (click)="makeAppoinment()">{{ 'PRACTITIONER_PROFILE.BTN_MAKEAPPOINMENT' | translate }}</button>
   </ion-item>
