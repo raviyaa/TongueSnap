@@ -9,24 +9,26 @@
 
 <ion-content>
   <ion-list>
-    <ion-item>
+  <!--   <ion-item>
       <h2 align="center">{{ 'TITLE' | translate }}</h2>
       <p align="center">{{ 'SUBTITLE' | translate }}</p>
+    </ion-item> -->
+    <ion-item>
+      <ion-img width="250" height="170" align="center" [src]="logoUrl" *ngIf="logoUrl"></ion-img>
     </ion-item>
   </ion-list>
 
   <div padding>
- <!--    <button ion-button icon-left>
-      <ion-icon name="home"></ion-icon>
-      Left Icon
+    <button ion-button icon-left (click)="gotoClient()" ion-button color="primary">
+      <ion-icon name="contact"></ion-icon>
+      {{ 'CLIENT_BUTTON' | translate }}
     </button>
-
-    <button ion-button icon-left>
-      Right Icon
-      <ion-icon name="home"></ion-icon>
-    </button> -->
-     <button (click)="gotoClient()" ion-button color="primary" block>{{ 'CLIENT_BUTTON' | translate }}</button>
-    <button (click)="gotoPractitioner()" ion-button color="primary" block>{{ 'PRACTITIONER_BUTTON' | translate }}</button>
+    <button ion-button icon-left (click)="gotoPractitioner()" ion-button color="primary">
+      <ion-icon name="contact"></ion-icon>
+      {{ 'PRACTITIONER_BUTTON' | translate }}
+    </button>
+  <!--   <button (click)="gotoClient()" ion-button color="primary" block>{{ 'CLIENT_BUTTON' | translate }}</button>
+    <button (click)="gotoPractitioner()" ion-button color="primary" block>{{ 'PRACTITIONER_BUTTON' | translate }}</button> -->
   </div>
 
 </ion-content>

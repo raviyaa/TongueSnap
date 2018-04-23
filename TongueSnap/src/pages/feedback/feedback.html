@@ -9,18 +9,24 @@
 
 <ion-content padding>
   <ion-list *ngFor="let snap of snaps">
-    <ion-item>
-      <ion-avatar item-start>
-        <img src={{snap?.imageUrl}}>
-      </ion-avatar>
-      <h2>{{snap?.description}}</h2>
-      <h3 *ngIf="snap.formattedComments!=null">Comments</h3>
-      <ul>
-        <li *ngFor="let comm of snap.formattedComments">
-          {{comm}}
-        </li>
-      </ul>
-    </ion-item>
+    <ion-card>
+      <ion-card-content>
+        <ion-avatar item-start>
+          <img src={{snap?.imageUrl}}>
+        </ion-avatar>
+        <h2>{{snap?.description}}</h2>
+        <ion-label icon-left>
+          <ion-icon name="calendar"></ion-icon>
+          {{snap?.timeStamp | date: 'dd/MM/yyyy'}}
+        </ion-label>
+        <h3 *ngIf="snap.formattedComments!=null">Comments</h3>
+        <ul>
+          <li *ngFor="let comm of snap.formattedComments">
+            {{comm}}
+          </li>
+        </ul>
+      </ion-card-content>
+    </ion-card>
   </ion-list>
   <ion-list>
     <div padding>

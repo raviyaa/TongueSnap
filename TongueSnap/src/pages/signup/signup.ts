@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, FormControl, FormArray, Validators, FormControl
 import { FirebaseService } from '../../providers/firebase-service/firebase-service';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as _ from 'underscore';
+import { APP_DI_CONFIG } from '../../app/app-config/app-config.constants';
 
 @IonicPage()
 @Component({
@@ -16,6 +17,7 @@ import * as _ from 'underscore';
 export class SignupPage {
   user: User;
   signUpForm: FormGroup;
+  logoUrl: string = APP_DI_CONFIG.LOGO_URL;
   private signupErrorString: string;
 
   constructor(private navCtrl: NavController,

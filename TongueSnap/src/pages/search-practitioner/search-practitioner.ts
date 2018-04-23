@@ -120,7 +120,8 @@ export class SearchPractitionerPage {
         imageUrl: this.uploadedImageUrl,
         description: this.selectedDescription,
         practitioners: this.selectedPractitioners,
-        patientId: this.selectedUser.key
+        patientId: this.selectedUser.key,
+        timeStamp: new Date(),
       };
       const key = APP_DI_CONFIG.KEY_SNAP + Math.floor(Date.now() / 1000);
       this.firebaseService.createSnap(key, JSON.parse(JSON.stringify(snapObj))).then((user) => {

@@ -23,6 +23,7 @@ export class LoginPage {
   loginForm: FormGroup;
   list: any[];
   currentUser: any;
+  logoUrl: string = APP_DI_CONFIG.LOGO_URL;
   private loginErrorString: string;
 
   constructor(public navCtrl: NavController,

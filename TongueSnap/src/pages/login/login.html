@@ -8,11 +8,13 @@
 
 
 <ion-content>
-  <h2 align="center">{{ 'TITLE' | translate }}</h2>
-  <p align="center">{{ 'SUBTITLE' | translate }}</p>
+  <!--   <h2 align="center">{{ 'TITLE' | translate }}</h2>
+  <p align="center">{{ 'SUBTITLE' | translate }}</p> -->
   <form [formGroup]="loginForm" (submit)="doLogin()">
     <ion-list>
-
+      <ion-item>
+        <ion-img width="250" height="170" align="center" [src]="logoUrl" *ngIf="logoUrl"></ion-img>
+      </ion-item>
       <ion-item>
         <ion-label icon-left>
           <ion-icon name="mail"></ion-icon>
@@ -30,9 +32,13 @@
       <div padding>
         <button ion-button color="primary" block>{{ 'LOGIN_BUTTON' | translate }}</button>
       </div>
-
+      <ion-item>
+        <ion-checkbox></ion-checkbox>
+        <ion-label>{{ 'REMEMBER' | translate }}</ion-label>
+      </ion-item>
+      <p align="center">{{ 'FORGOTPWD' | translate }}</p>
     </ion-list>
   </form>
-  <p align="center">{{ 'FORGOTPWD' | translate }}</p>
-  <p align="center" (click)="signUp()">{{ 'CREATENEW' | translate }}</p>
+  <p align="center">{{ 'NEWUSER' | translate }}</p>
+  <h3 align="center" (click)="signUp()">{{ 'CREATENEW' | translate }}</h3>
 </ion-content>
