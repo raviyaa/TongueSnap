@@ -17,7 +17,7 @@ import { APP_DI_CONFIG } from '../../app/app-config/app-config.constants';
 export class PracSignupImgUploadPage {
 
   base64Image: string = "./assets/img/profile.png";
-  logoUrl: string = APP_DI_CONFIG.LOGO_URL;
+  logoUrl: string = APP_DI_CONFIG.LOGO2_URL;
   image: string;
   user: any;
 

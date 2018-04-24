@@ -16,7 +16,7 @@ import { APP_DI_CONFIG } from '../../app/app-config/app-config.constants';
 export class PracSignupPage {
   user: User;
   signUpForm: FormGroup;
-  logoUrl: string = APP_DI_CONFIG.LOGO_URL;
+  logoUrl: string = APP_DI_CONFIG.LOGO2_URL;
   private signupErrorString: string;
 
   constructor(private navCtrl: NavController,

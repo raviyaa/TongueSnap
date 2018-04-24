@@ -34,6 +34,7 @@ export class FeedbackPage {
     if (!_.isEmpty(this.user)) {
       this.firebaseService.getListOfSnapsByPatientId(this.user.key).subscribe((snaps) => {
         if (!_.isEmpty(snaps)) {
+          console.log(snaps);
           _.each(snaps, function (snap, key) {
             if (!_.isEmpty(snap.comments)) {
               var formattedComments = [];

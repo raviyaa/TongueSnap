@@ -16,8 +16,17 @@
     <h3>{{user?.title}}</h3>
     <p icon-left>
       <ion-icon name="locate"></ion-icon>{{user?.location}}</p>
-    <button ion-button color="light" (click)="goToCall()">{{ 'PRACTITIONER_PROFILE.BTN_TALK' | translate }}</button>
-    <button ion-button color="light" (click)="makeAppoinment()">{{ 'PRACTITIONER_PROFILE.BTN_MAKEAPPOINMENT' | translate }}</button>
+  </ion-item>
+  <ion-item>
+    <ion-label icon-left (click)="goToCall()">
+      <ion-icon name="phone-portrait"></ion-icon>{{ 'PRACTITIONER_PROFILE.BTN_TALK' | translate }}
+    </ion-label>
+    <ion-label icon-left (click)="makeAppoinment()">
+      <ion-icon name="calendar"></ion-icon>{{ 'PRACTITIONER_PROFILE.BTN_MAKEAPPOINMENT' | translate }}
+    </ion-label>
+    <ion-label icon-left>
+      <ion-icon name="ribbon"></ion-icon>Save
+    </ion-label>
   </ion-item>
   <p>{{user?.bio}}</p>
 </ion-content>

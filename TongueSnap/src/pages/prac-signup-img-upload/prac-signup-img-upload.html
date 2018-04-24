@@ -11,7 +11,7 @@
   <!-- <h2 align="center">{{ 'TITLE' | translate }}</h2>
   <p align="center">{{ 'SUBTITLE' | translate }}</p> -->
   <ion-list>
-    <ion-item>
+    <ion-item class="sign-img">
       <ion-img width="250" height="170" align="center" [src]="logoUrl" *ngIf="logoUrl"></ion-img>
     </ion-item>
     <ion-item>
@@ -33,4 +33,11 @@
     </div>
 
   </ion-list>
+  <div class="container">
+    <ul class="progressbar">
+      <li class="active"></li>
+      <li class="active"></li>
+      <li></li>
+    </ul>
+  </div>
 </ion-content>
