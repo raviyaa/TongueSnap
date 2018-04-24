@@ -7,6 +7,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FirebaseService } from '../../providers/firebase-service/firebase-service';
 import { DataService } from '../../providers/dataservice/dataservice';
 import * as _ from 'underscore';
+import { APP_DI_CONFIG } from '../../app/app-config/app-config.constants';
 
 @IonicPage()
 @Component({
@@ -16,6 +17,7 @@ import * as _ from 'underscore';
 export class PracSignupImgUploadPage {
 
   base64Image: string = "./assets/img/profile.png";
+  logoUrl: string = APP_DI_CONFIG.LOGO_URL;
   image: string;
   user: any;
 

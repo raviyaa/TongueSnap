@@ -1,3 +1,43 @@
 page-prac-signup {
-
+    .toolbar-title-md {
+        text-align: center;
+    }
+    ion-item.sign-img {
+        width: 250px;
+        height: 170px;
+        margin: 0 auto;
+        margin-top: 50px;
+        padding: 0px
+    }
+    ion-item.sign-form {
+        width: auto;
+        height: 50px;
+        margin: 0 auto;
+        display: block;
+    }
+    .label-md {
+        margin: 0px;
+    }
+    ion-item.sign-form {
+        width: auto;
+        height: 50px;
+        margin: 0 auto;
+        display: block;
+        padding-left: 0px;
+        margin: 5px 50px;
+    }
+    .list-md .item-block .item-inner {
+        border-bottom: 1px solid #dedede;
+        padding-right: 0px;
+    }
+    .button-md-primary {
+        color: #fff;
+        background-color: #488aff;
+        width: 270px;
+        margin: 0 auto;
+        border-radius: 5px;
+    }
+    ion-app.md [padding] {
+        padding: 0px;
+    }
 }

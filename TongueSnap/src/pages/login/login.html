@@ -12,24 +12,25 @@
   <p align="center">{{ 'SUBTITLE' | translate }}</p> -->
   <form [formGroup]="loginForm" (submit)="doLogin()">
     <ion-list>
-      <ion-item>
+      <ion-item class="sign-img">
         <ion-img width="250" height="170" align="center" [src]="logoUrl" *ngIf="logoUrl"></ion-img>
       </ion-item>
-      <ion-item>
+
+      <ion-item class="sign-form">
         <ion-label icon-left>
           <ion-icon name="mail"></ion-icon>
         </ion-label>
         <ion-input type="email" formControlName="email" placeholder=" {{ 'EMAIL' | translate }}"></ion-input>
       </ion-item>
 
-      <ion-item>
+      <ion-item class="sign-form">
         <ion-label icon-left>
           <ion-icon name="key"></ion-icon>
         </ion-label>
         <ion-input type="password" formControlName="password" placeholder=" {{ 'PASSWORD' | translate }}"></ion-input>
       </ion-item>
 
-      <div padding>
+      <div padding class="login-btn">
         <button ion-button color="primary" block>{{ 'LOGIN_BUTTON' | translate }}</button>
       </div>
       <ion-item>

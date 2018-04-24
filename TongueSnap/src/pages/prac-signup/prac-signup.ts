@@ -6,7 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FirebaseService } from '../../providers/firebase-service/firebase-service';
 import { TranslateService } from '@ngx-translate/core';
 import { PracSignupImgUploadPage } from '../prac-signup-img-upload/prac-signup-img-upload';
-
+import { APP_DI_CONFIG } from '../../app/app-config/app-config.constants';
 
 @IonicPage()
 @Component({
@@ -16,6 +16,7 @@ import { PracSignupImgUploadPage } from '../prac-signup-img-upload/prac-signup-i
 export class PracSignupPage {
   user: User;
   signUpForm: FormGroup;
+  logoUrl: string = APP_DI_CONFIG.LOGO_URL;
   private signupErrorString: string;
 
   constructor(private navCtrl: NavController,

@@ -8,10 +8,12 @@
 
 
 <ion-content padding>
-  <h2 align="center">{{ 'TITLE' | translate }}</h2>
-  <p align="center">{{ 'SUBTITLE' | translate }}</p>
+  <!-- <h2 align="center">{{ 'TITLE' | translate }}</h2>
+  <p align="center">{{ 'SUBTITLE' | translate }}</p> -->
   <ion-list>
-
+    <ion-item>
+      <ion-img width="250" height="170" align="center" [src]="logoUrl" *ngIf="logoUrl"></ion-img>
+    </ion-item>
     <ion-item>
       <ion-label align="center">{{ 'PRACTITIONER_PROFILE.IMG_UPLOAD.LBL_ADD_IMG' | translate }}</ion-label>
     </ion-item>
@@ -25,7 +27,9 @@
     </ion-item>
 
     <div padding>
-      <button ion-button (click)="upload()" color="primary" block>Sign Up<!-- {{ 'LOGIN_BUTTON' | translate }} --></button>
+      <button ion-button (click)="upload()" color="primary" block>Sign Up
+        <!-- {{ 'LOGIN_BUTTON' | translate }} -->
+      </button>
     </div>
 
   </ion-list>
