@@ -37,6 +37,7 @@ export class PracSignupPage {
       speciality: ['', Validators.required],
       bio: ['', Validators.required],
       email: ['', Validators.required],
+      location: ['', Validators.required],
       password: ['', Validators.required],
       repassword: ['', Validators.required]
     });

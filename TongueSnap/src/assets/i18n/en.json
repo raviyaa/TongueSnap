@@ -66,6 +66,7 @@
       "SPECIALITY": "Speciality",
       "SHORTBIO": "Short Bio",
       "PASSWORD": "Password",
+      "LOCATION":"Location",
       "REPASSWORD": "Retype Password",
       "BTN_NEXT": "Next"
     },
