@@ -61,18 +61,27 @@
         </ion-label>
         <ion-input type="password" formControlName="repassword" placeholder="{{ 'PRACTITIONER_PROFILE.SIGNUP.REPASSWORD' | translate }}"></ion-input>
       </ion-item>
-      <div padding>
-        <button ion-button color="primary" block>{{ 'PRACTITIONER_PROFILE.SIGNUP.BTN_NEXT' | translate }}</button>
-      </div>
-
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6 class="progress-steps">
+            <ion-col col-4 class="tbl">
+             <div class="progress-btns-active tbl-cell">1</div>
+            </ion-col>
+            <ion-col col-4 >
+              <div class="progress-btns-deactive">2</div>
+            </ion-col>
+            <ion-col col-4 >
+              <div class="progress-btns-deactive">3</div>
+            </ion-col>
+          </ion-col>
+          <ion-col col-6 class="progress-steps">
+            <div >
+              <button ion-button color="primary" block>{{ 'PRACTITIONER_PROFILE.SIGNUP.BTN_NEXT' | translate }}</button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-list>
   </form>
-  <div class="container">
-      <ul class="progressbar">
-        <li class="active"></li>
-        <li></li>
-        <li></li>
-      </ul>
-    </div>
 </ion-content>
 <ion-header>

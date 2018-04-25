@@ -10,7 +10,7 @@
 <ion-content padding>
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
   <ion-list *ngFor="let user of users">
-    <ion-card>
+    <ion-card class="card-radius">
       <ion-item>
         <ion-checkbox (ionChange)="chekBoxClicked(user,$event)"></ion-checkbox>
         <ion-avatar item-start>

@@ -32,10 +32,12 @@ page-prac-signup {
     }
     .button-md-primary {
         color: #fff;
-        background-color: #488aff;
-        width: 270px;
+        background-color: #f59540;
+        width: 50%;
         margin: 0 auto;
         border-radius: 5px;
+        float: right;
+        margin-right: 10px;
     }
     ion-app.md [padding] {
         padding: 0px;
@@ -92,4 +94,25 @@ page-prac-signup {
       .progressbar li.active + li:after {
         background-color: green;
       }
+      .progress-steps{
+          display: inline-block;
+      }
+     
+      .progress-btns-active,.progress-btns-deactive{
+        display: inline-block;
+        margin:auto;
+        padding-top: 4px;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        border-radius: 50%;
+        background-color: #f59540;
+        color:#fff;
+        margin-top: 5px;
+
+      }
+      .progress-btns-deactive{
+        background-color:grey;
+
+    }
 }

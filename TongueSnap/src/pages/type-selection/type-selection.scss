@@ -9,4 +9,25 @@ page-type-selection {
         margin-top: 50px;
         padding: 0px
     }
+    ion-row.select-btn {
+        width: 400px;
+        margin: 0 auto;
+    }
+    button.btn-client {
+        height: 50px;
+        border-radius: 5px;
+
+    }
+    button.btn-pra {
+        height: 50px;
+        background-color: #f59540;
+        border-radius: 5px;
+    }
+    .btn-padding{
+        padding: 5px;
+    }
+    .icon-padding{
+        padding-right: 13px !important;
+        font-size: 1.4em !important;
+    }
 }

@@ -14,8 +14,8 @@
         <ion-avatar item-start>
           <img src={{snap?.imageUrl}}>
         </ion-avatar>
-        <h2>gasghsha<!-- {{snap?.description}} --></h2>
-        <ion-label icon-left>
+        <ion-label><h2>{{snap?.description}}</h2></ion-label>
+        <ion-label icon-left class="calendar-float">
           <ion-icon name="calendar"></ion-icon>
           {{snap?.timeStamp | date: 'dd/MM/yyyy'}}
         </ion-label>

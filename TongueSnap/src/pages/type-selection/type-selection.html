@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-list>
-  <!--   <ion-item>
+    <!--   <ion-item>
       <h2 align="center">{{ 'TITLE' | translate }}</h2>
       <p align="center">{{ 'SUBTITLE' | translate }}</p>
     </ion-item> -->
@@ -19,15 +19,26 @@
   </ion-list>
 
   <div padding>
-    <button ion-button icon-left (click)="gotoClient()" ion-button color="primary">
-      <ion-icon name="contact"></ion-icon>
-      {{ 'CLIENT_BUTTON' | translate }}
-    </button>
-    <button ion-button icon-left (click)="gotoPractitioner()" ion-button color="primary">
-      <ion-icon name="contact"></ion-icon>
-      {{ 'PRACTITIONER_BUTTON' | translate }}
-    </button>
-  <!--   <button (click)="gotoClient()" ion-button color="primary" block>{{ 'CLIENT_BUTTON' | translate }}</button>
+      <ion-footer>
+        <ion-grid>
+            <ion-row class="select-btn">
+              <ion-col col-6>
+                <button ion-button block icon-left (click)="gotoClient()" ion-button color="primary" class="btn-client">
+                    <i class="fas fa-user icon-padding"></i>
+                  {{ 'CLIENT_BUTTON' | translate }}
+                </button>
+              </ion-col>
+              <ion-col col-6>
+                <button ion-button block icon-left (click)="gotoPractitioner()" class="btn-pra">
+                  <i class="fas fa-user-md icon-padding"></i>
+                  {{ 'PRACTITIONER_BUTTON' | translate }}
+                </button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-footer>
+    
+    <!--   <button (click)="gotoClient()" ion-button color="primary" block>{{ 'CLIENT_BUTTON' | translate }}</button>
     <button (click)="gotoPractitioner()" ion-button color="primary" block>{{ 'PRACTITIONER_BUTTON' | translate }}</button> -->
   </div>
 

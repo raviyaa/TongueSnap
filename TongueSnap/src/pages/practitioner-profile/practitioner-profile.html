@@ -7,8 +7,8 @@
 </ion-header>
 
 
-<ion-content padding>
-  <ion-item>
+<ion-content class="background-padding">
+  <ion-item class="background-with-padding">
     <ion-avatar item-start>
       <img src={{user?.avatarUrl}}>
     </ion-avatar>
@@ -17,9 +17,10 @@
     <p icon-left>
       <ion-icon name="locate"></ion-icon>{{user?.location}}</p>
   </ion-item>
-  <ion-item>
-    <ion-label icon-left (click)="goToCall()">
-      <ion-icon name="phone-portrait"></ion-icon>{{ 'PRACTITIONER_PROFILE.BTN_TALK' | translate }}
+  <ion-item class="ion-item-background">
+    <ion-label icon-left (click)="goToCall()" class="icon-lbl">
+      <ion-icon name="phone-portrait"></ion-icon>
+      <span class="span-lbl">{{ 'PRACTITIONER_PROFILE.BTN_TALK' | translate }}</span>
     </ion-label>
     <ion-label icon-left (click)="makeAppoinment()">
       <ion-icon name="calendar"></ion-icon>{{ 'PRACTITIONER_PROFILE.BTN_MAKEAPPOINMENT' | translate }}
@@ -28,5 +29,5 @@
       <ion-icon name="ribbon"></ion-icon>Save
     </ion-label>
   </ion-item>
-  <p>{{user?.bio}}</p>
+  <p class="background-with-padding">{{user?.bio}}</p>
 </ion-content>
