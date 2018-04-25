@@ -4,6 +4,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
+import { PracSignupImgUploadPage } from '../pages/prac-signup-img-upload/prac-signup-img-upload';
 
 @Component({
   template: `<ion-menu [content]="content">
@@ -11,7 +12,7 @@ import { Config, Nav, Platform } from 'ionic-angular';
   <ion-nav #content [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage = LoginPage;  
+  rootPage = PracSignupImgUploadPage;  
 
 
   @ViewChild(Nav) nav: Nav;
