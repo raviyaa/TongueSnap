@@ -8,7 +8,31 @@
 
 
 <ion-content padding>
-  <ion-list *ngFor="let inquire of inquires">
+    <ion-list *ngFor="let inquire of inquires">
+        <ion-card>
+            <ion-item (click)="itemClicked(inquire)">
+            <ion-avatar item-start>
+                <img src={{inquire?.imageUrl}}>
+            </ion-avatar>
+            <ion-label><h2>{{inquire?.description}}</h2></ion-label>
+            <ion-label icon-left class="calendar-float">
+              <ion-icon name="calendar"></ion-icon>
+              {{inquire?.timeStamp | date: 'dd/MM/yyyy'}}
+            </ion-label>
+          </ion-item>
+          <ion-card-content>
+            <h3 *ngIf="inquire.formattedComments!=null">Comments</h3>
+            <ul>
+              <li *ngFor="let comm of inquire.formattedComments">
+                {{comm}}
+              </li>
+            </ul>
+          </ion-card-content>
+        </ion-card>
+      </ion-list>
+
+
+<!--   <ion-list *ngFor="let inquire of inquires">
     <ion-item (click)="itemClicked(inquire)">
       <ion-avatar item-start>
         <img src={{inquire?.imageUrl}}>
@@ -21,5 +45,5 @@
         </li>
       </ul>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
 </ion-content>
