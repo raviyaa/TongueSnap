@@ -22,11 +22,15 @@
       <ion-icon name="phone-portrait"></ion-icon>
       <span class="span-lbl">{{ 'PRACTITIONER_PROFILE.BTN_TALK' | translate }}</span>
     </ion-label>
-    <ion-label icon-left (click)="makeAppoinment()">
-      <ion-icon name="calendar"></ion-icon>{{ 'PRACTITIONER_PROFILE.BTN_MAKEAPPOINMENT' | translate }}
+    <ion-label icon-left (click)="makeAppoinment()" class="icon-lbl">
+      <ion-icon name="calendar"></ion-icon>
+      <span class="span-lbl">
+        {{ 'PRACTITIONER_PROFILE.BTN_MAKEAPPOINMENT' | translate }}
+      </span>
     </ion-label>
-    <ion-label icon-left>
-      <ion-icon name="ribbon"></ion-icon>Save
+    <ion-label icon-left class="icon-lbl">
+      <ion-icon name="ribbon"></ion-icon>  <span class="span-lbl">Save
+        </span>
     </ion-label>
   </ion-item>
   <p class="background-with-padding">{{user?.bio}}</p>
